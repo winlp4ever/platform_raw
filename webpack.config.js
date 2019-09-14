@@ -7,14 +7,11 @@ const public = path.resolve(__dirname, 'public');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    mode: 'development',
     entry: ['@babel/polyfill', './src/index.js'],
     output: {
         filename: 'main.js',
         path: public
-    },
-    devServer: {
-        contentBase: public,
-        hot: true,
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
