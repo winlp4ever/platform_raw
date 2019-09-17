@@ -5,21 +5,40 @@ const source = path.resolve(__dirname, 'src');
 const public = path.resolve(__dirname, 'public');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     mode: 'development',
-    entry: ['@babel/polyfill', './src/index.js'],
+    entry: {
+        'index': ['@babel/polyfill', './src/index.js'],
+        'anotherPage': './src/anotherPage.js'
+    },
     output: {
-        filename: 'main.js',
-        path: public
+        filename: '[name].js',
+        path: public,
+        //publicPath: '/demo/'
+    },
+    devServer: {
+        contentBase: './public',
+        hot: true,
+        host: 'localhost',
+        port: 5000,
+        compress: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new CleanWebpackPlugin(),
-        new HtmlWebPackPlugin({
-            template: path.join(source, 'index.html'),
-            filename: path.join(public, 'index.html')
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: ['index'],
+            //filename: path.join(public, 'index'),
+            template: path.join(source, 'index.html')
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: ['anotherPage'],
+            filename: path.join(public, 'anotherPage'),
+            template: path.join(source, 'anotherPage.html')
         })
     ],
     module: {
