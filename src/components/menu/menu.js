@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from './menu.scss';
+import './menu.scss';
 
 class Option extends Component {
     render() {
