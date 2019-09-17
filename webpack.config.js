@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const source = path.resolve(__dirname, 'src');
 const public = path.resolve(__dirname, 'public');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -15,6 +16,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
             template: path.join(source, 'index.html'),
             filename: path.join(public, 'index.html')
