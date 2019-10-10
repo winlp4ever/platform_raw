@@ -4,20 +4,20 @@ import './menu.scss';
 class Option extends Component {
     render() {
         return <div className='option'>
-            {this.props.value}
+            <a href={this.props.href}>{this.props.value}</a>
         </div>;
     }
 }
 
 class Menu extends Component {
-    renderOption(msg) {
-        return <Option value={msg} />
+    renderOption(title, link) {
+        return <Option value={title} href={link}/>
     }
     
     render() {
         return <div className='menu'>
-            {this.renderOption('Home')}
-            {this.renderOption('Profile')}
+            {this.renderOption('Home', '/')}
+            {this.renderOption('Profile', 'anotherPage')}
         </div>
     }
 }

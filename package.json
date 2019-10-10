@@ -23,13 +23,19 @@
     "style-loader": "^1.0.0",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.2"
   },
   "main": "webpack.config.js",
   "description": "",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "request": "^2.88.0"
   }
 }
