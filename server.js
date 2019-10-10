@@ -1,4 +1,5 @@
 //const webpackDevServer = require('webpack-dev-server');
+const webpack = require('webpack');
 const middleware = require('webpack-dev-middleware');
 const fs = require('fs');
 const path = require('path');
@@ -24,6 +25,8 @@ const compiler = webpack(config);
 app.use(
     middleware(compiler, options)
 );
+
+app.use(require('webpack-hot-middleware')(compiler));
   
 
 app.listen(5000, 'localhost', () => {
