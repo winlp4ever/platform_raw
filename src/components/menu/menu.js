@@ -17,7 +17,7 @@ class Menu extends Component {
     render() {
         return <div className='menu'>
             {this.renderOption('Home', '/')}
-            {this.renderOption('Profile', 'anotherPage')}
+            {this.renderOption('Posts', '/')}
         </div>
     }
 }

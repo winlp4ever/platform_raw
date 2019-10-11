@@ -1,13 +1,32 @@
 .option {
-    padding: 5px 10px;
-    border-radius: 5px;
-    background: rgb(32, 129, 48);
-    color: black;
+    display: inline-block;
+    height: 100%;
+    a {
+        color: rgb(32, 32, 32);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;    
+        display: inline-block;
+        margin:auto;
+        border: 1px solid black;
+    }
+    padding: 10px 5px;
+    border: 1px solid black;
 }
 
 .menu {
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    font-size: 40px;
+    height: 80px;
+    // flex
+        position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    padding: 0px 10px;
+    // font
+    font: {
+        size: 100%;
+        family: 'Open Sans Condensed', sans-serif;
+    }
+    background-color: #eceff1;
+    border-bottom: 1px solid lightgrey;
 }
