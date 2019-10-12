@@ -1,32 +1,39 @@
-.option {
+button.option {
+    background: none;
+    border: none;
+    outline: none;
     display: inline-block;
     height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid lightgrey;
+    border-bottom: 2px solid #00000000;
     a {
+        font-size: 120%;
         color: rgb(32, 32, 32);
         letter-spacing: 1px;
         text-transform: uppercase;
         text-align: center;    
         display: inline-block;
-        margin:auto;
-        border: 1px solid black;
+        margin: auto 10px;
     }
-    padding: 10px 5px;
-    border: 1px solid black;
+    transition: all 0.2s;
+    &:hover {
+        background: rgba(0, 0, 0, 0.048);
+        border-bottom: 2px solid lightslategrey;
+    }
 }
 
-.menu {
+div.menu {
     height: 80px;
-    // flex
-        position: fixed;
+    position: fixed;
     width: 100%;
     top: 0px;
     left: 0px;
-    padding: 0px 10px;
-    // font
+    padding: 0px;
     font: {
-        size: 100%;
         family: 'Open Sans Condensed', sans-serif;
     }
-    background-color: #eceff1;
+    background-color: #fff3e0;
     border-bottom: 1px solid lightgrey;
 }

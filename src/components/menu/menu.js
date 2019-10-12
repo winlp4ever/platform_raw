@@ -3,9 +3,9 @@ import './menu.scss';
 
 class Option extends Component {
     render() {
-        return <div className='option'>
+        return <button className='option'>
             <a href={this.props.href}>{this.props.value}</a>
-        </div>;
+        </button>;
     }
 }
 
