@@ -5,7 +5,9 @@ class Post extends Component {
     render() {
         return (<div 
             className='post' 
-            dangerouslySetInnerHTML={{__html: this.props.value}}>
+            dangerouslySetInnerHTML={{
+                __html: `<h1>${this.props.value.title}</h1><br><p>${this.props.value.content}</p>`
+            }}>
         </div>);
     }
 }
@@ -42,7 +44,7 @@ class Posts extends Component {
     render() {
         let items = []
         for (const [i, post] of this.state.posts.entries()) {
-            items.push(<Post key={i} value={post.content} />);
+            items.push(<Post key={i} value={post} />);
         }
         return (<div 
             className='all-posts'>
