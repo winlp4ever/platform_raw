@@ -5,7 +5,7 @@ class Post extends Component {
     render() {
         return (<div 
             className='post' 
-            dangerouslySetInnerHTML={this.props.value}>
+            dangerouslySetInnerHTML={{__html: this.props.value}}>
         </div>);
     }
 }
@@ -14,7 +14,7 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: [{title: 'ex', content: 'welcome'}]
+            posts: []
         }
     }
 
@@ -29,7 +29,6 @@ class Posts extends Component {
         let json = await fetch('/posts');
         let data = await json.json();
         this.setState({posts: data.posts})
-        console.log(this.state.posts[0].title);
         /*
         fetch('/posts')
             .then(res => res.json())
@@ -41,9 +40,13 @@ class Posts extends Component {
         */
     }
     render() {
+        let items = []
+        for (const [i, post] of this.state.posts.entries()) {
+            items.push(<Post key={i} value={post.content} />);
+        }
         return (<div 
-            className='all-posts'
-            dangerouslySetInnerHTML={{__html: this.state.posts[0].content}}>
+            className='all-posts'>
+            {items}
         </div>)
     }
 }
