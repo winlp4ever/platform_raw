@@ -9,6 +9,8 @@ const bodyParser = require('body-parser');
 var app = express();
 app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('views', './public');
+app.set('view engine','ejs');
 
 const config = require('./webpack.config.js');
 
@@ -27,7 +29,19 @@ app.use(
 );
 
 app.use(require('webpack-hot-middleware')(compiler));
-  
+app.get('/', (req, res) => {
+    res.render('/index.ejs', {txt: 'an example'});
+})
+
+app.get('/posts', (req, res) => {
+    fs.readFile('posts.json', (err, data) => {
+        if (err) throw err;
+        let posts = JSON.parse(data);
+        console.log(posts);
+        res.send(posts);
+    });
+    
+})
 
 app.listen(5000, 'localhost', () => {
     console.log('dev server listening on port 5000');

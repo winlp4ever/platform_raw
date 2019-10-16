@@ -1,0 +1,8 @@
+{
+    "posts": [
+        {
+            "title": "example",
+            "content": "<p>This is an example</p>"
+        }
+    ]
+}
