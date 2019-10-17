@@ -19,6 +19,8 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.savePost = this.savePost.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
         this.state = {
             posts: [],
             value: ''
@@ -34,7 +36,7 @@ class Posts extends Component {
         this.setState({posts: data.posts})
     }
 
-    async onClick() {
+    async savePost() {
         /**
          * save new post, send it to the server to update posts, then wait
          * for server response and generate new posts
@@ -56,10 +58,17 @@ class Posts extends Component {
     handleChange(e) {
         this.setState({ value: e.target.value });
     }
+
+    handleKeyPress(e) {
+        if (e.key == 'Enter') {
+            this.savePost();
+        }
+    }
     
     getRawMarkup() {
         /**
          * create a remarkable obj and use it to convert md code to html
+         * in markdown editor
          */
         const md = new Remarkable();
         return md.render(this.state.value);
@@ -82,7 +91,7 @@ class Posts extends Component {
             />
             <button 
                 id='save-post'
-                onClick={_ => this.onClick()}
+                onClick={this.savePost}
             >
                 Save
             </button>
@@ -94,13 +103,14 @@ class Posts extends Component {
         for (const [i, post] of this.state.posts.entries()) {
             items.push(<Post key={i} value={post} />);
         }
-        return (<div className='all-posts'>
+        return (<div 
+            className='all-posts'
+            onKeyPress={this.handleKeyPress}
+            >
             {this.renderEditor()}
             {items}
         </div>)
     }
 }
-
-
 
 export default Posts;

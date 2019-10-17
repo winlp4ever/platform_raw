@@ -14,3 +14,15 @@ componentDidUpdate(prevProps) {
     }
 }
 ```
+
+## Lessons learned
+
+* `bind` assigns a function to an object of same name or, in simpler words, it makes the function an object itself. Let's say you define a function `f` in which some properties of an object `O` are modified. So you may want to write:
+
+```js
+f.bind(this)
+```
+
+That way, you may later write `f` without parentheses `()` and still the function runs, otherwise an error will display as `f is undefined`
+
+* each time `setState()` is called, the `render()` function will then be called automatically to re-render changes.
