@@ -25,20 +25,20 @@ class Posts extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        // Typical usage (don't forget to compare props):
-        if (this.props.userID !== prevProps.userID) {
-          //this.fetchData(this.props.userID);
-        }
-    }
-
     async componentDidMount() {
+        /**
+         * Request posts from server and update data on front end
+         */
         let json = await fetch('/posts');
         let data = await json.json();
         this.setState({posts: data.posts})
     }
 
     async onClick() {
+        /**
+         * save new post, send it to the server to update posts, then wait
+         * for server response and generate new posts
+         */
         try {     
             const response = await fetch('/save-post', {
                 method: 'POST',
@@ -58,8 +58,35 @@ class Posts extends Component {
     }
     
     getRawMarkup() {
+        /**
+         * create a remarkable obj and use it to convert md code to html
+         */
         const md = new Remarkable();
         return md.render(this.state.value);
+    }
+
+    renderEditor() {
+        /**
+         * This function render the Editor inside Posts section
+         */
+        return (<div className="md-editor">
+            <div className="md-render"
+                dangerouslySetInnerHTML={{__html: this.getRawMarkup()}}
+            />
+            <textarea
+                rows={1}
+                id="enter-text"
+                placeholder="Write your new post"
+                onChange={this.handleChange}
+                defaultValue={''}
+            />
+            <button 
+                id='save-post'
+                onClick={_ => this.onClick()}
+            >
+                Save
+            </button>
+        </div>);
     }
 
     render() {
@@ -67,28 +94,8 @@ class Posts extends Component {
         for (const [i, post] of this.state.posts.entries()) {
             items.push(<Post key={i} value={post} />);
         }
-        return (<div 
-            className='all-posts'
-            
-        >
-            <div className="md-editor">
-                <div className="md-render"
-                    dangerouslySetInnerHTML={{__html: this.getRawMarkup()}}
-                />
-                <textarea
-                    rows={1}
-                    id="enter-text"
-                    placeholder="Write your new post"
-                    onChange={this.handleChange}
-                    defaultValue={''}
-                />
-                <button 
-                    id='save-post'
-                    onClick={_ => this.onClick()}
-                >
-                    Save
-                </button>
-            </div>
+        return (<div className='all-posts'>
+            {this.renderEditor()}
             {items}
         </div>)
     }
