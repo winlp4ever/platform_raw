@@ -7,8 +7,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 var app = express();
-app.use(express.static('./public'));
+app.use(express.static(__dirname + './public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.set('views', './public');
 app.set('view engine','ejs');
 
@@ -24,23 +25,50 @@ const options = {
 const compiler = webpack(config);
 //const server = new webpackDevServer(compiler, options);
 
+var posts = require('./posts.json');
+console.log(posts);
+
 app.use(
     middleware(compiler, options)
 );
 
 app.use(require('webpack-hot-middleware')(compiler));
-app.get('/', (req, res) => {
-    res.render('/index.ejs', {txt: 'an example'});
-})
 
 app.get('/posts', (req, res) => {
-    fs.readFile('posts.json', (err, data) => {
-        if (err) throw err;
-        let posts = JSON.parse(data);
-        console.log(posts);
-        res.send(posts);
+    res.send(posts);
+})
+
+app.get('/', (req, res, next) => {
+    var filename = path.join(compiler.outputPath,'index');
+    compiler.outputFileSystem.readFile(filename, (err, result) => {
+        if (err) {
+            return next(err);
+        }
+        res.set('content-type','text/html');
+        res.send(result);
+        res.end();
     });
-    
+});
+
+app.post('/save-post', (req, res, next) => {
+    console.log(req.body);
+    posts.posts.push({title: req.body.title, content: req.body.content});
+    //let p = path.join(path.join(__dirname, 'build'), 'index');
+    //res.sendFile(p);
+    /*
+    var filename = path.join(compiler.outputPath,'index');
+    compiler.outputFileSystem.readFile(filename, (err, result) => {
+        if (err) {
+            return next(err);
+        }
+        res.set('content-type','text/html');
+        res.send(result);
+        res.end();
+        console.log('OK');
+    });
+    */
+    console.log(posts);
+    res.json(posts);
 })
 
 app.listen(5000, 'localhost', () => {

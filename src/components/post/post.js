@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './post.scss';
+import $ from 'jquery';
+
 
 class Post extends Component {
     render() {
@@ -41,16 +43,36 @@ class Posts extends Component {
             .catch(error => console.log(error));
         */
     }
+
+    async handleClick() {
+        try {     
+            const response = await fetch('/save-post', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: 'another example', content: 'try hard' })
+            });
+    
+            let data = await response.json();
+            this.setState({posts: data.posts});
+            console.log('look at me!');
+        } catch(err) {
+            console.error(`Error: ${err}`);
+        }
+    }
+
     render() {
         let items = []
         for (const [i, post] of this.state.posts.entries()) {
             items.push(<Post key={i} value={post} />);
         }
         return (<div 
-            className='all-posts'>
+            className='all-posts'
+            onClick={_ => this.handleClick()}>
             {items}
         </div>)
     }
 }
+
+
 
 export default Posts;

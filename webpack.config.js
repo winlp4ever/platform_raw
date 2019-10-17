@@ -35,7 +35,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: true,
             chunks: ['index'],
-            //filename: path.join(public, 'index'),
+            filename: path.join(public, 'index'),
             template: path.join(source, 'index.ejs')
         }),
         new HtmlWebpackPlugin({

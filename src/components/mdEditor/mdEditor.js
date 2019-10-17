@@ -1,7 +1,7 @@
 import { Remarkable } from 'remarkable';
 import React, { Component } from 'react';
 import './mdEditor.scss';
-import './utils';
+//import updatePosts from './utils';
 
 class MdEditor extends Component {
     constructor(props) {
