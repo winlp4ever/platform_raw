@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Menu from "./components/menu/menu";
-import MdEditor from "./components/mdEditor/mdEditor";
 import Posts from "./components/post/post"
 
 import "./_common.scss";
 
 function renderWeb() {
     ReactDOM.render(<Menu />, document.getElementById("main"));
-    ReactDOM.render(<MdEditor />, document.getElementById("post"));
     ReactDOM.render(<Posts />, document.getElementById("posts"));
 }
 renderWeb();

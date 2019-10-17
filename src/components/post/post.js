@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './post.scss';
 import $ from 'jquery';
+import { Remarkable } from 'remarkable';
 
 
 class Post extends Component {
@@ -17,8 +18,10 @@ class Post extends Component {
 class Posts extends Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
-            posts: []
+            posts: [],
+            value: ''
         }
     }
 
@@ -33,31 +36,30 @@ class Posts extends Component {
         let json = await fetch('/posts');
         let data = await json.json();
         this.setState({posts: data.posts})
-        /*
-        fetch('/posts')
-            .then(res => res.json())
-            .then(resJSON => {
-                console.log(resJSON.name);
-                this.state.value = resJSON.name;
-            })
-            .catch(error => console.log(error));
-        */
     }
 
-    async handleClick() {
+    async onClick() {
         try {     
             const response = await fetch('/save-post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: 'another example', content: 'try hard' })
+                body: JSON.stringify({ title: 'new post', content: this.state.value })
             });
-    
             let data = await response.json();
-            this.setState({posts: data.posts});
-            console.log('look at me!');
+            this.setState({posts: data.posts, value: ''});
+            $('.all-posts textarea').val('');
         } catch(err) {
             console.error(`Error: ${err}`);
         }
+    }
+
+    handleChange(e) {
+        this.setState({ value: e.target.value });
+    }
+    
+    getRawMarkup() {
+        const md = new Remarkable();
+        return md.render(this.state.value);
     }
 
     render() {
@@ -67,7 +69,26 @@ class Posts extends Component {
         }
         return (<div 
             className='all-posts'
-            onClick={_ => this.handleClick()}>
+            
+        >
+            <div className="md-editor">
+                <div className="md-render"
+                    dangerouslySetInnerHTML={{__html: this.getRawMarkup()}}
+                />
+                <textarea
+                    rows={1}
+                    id="enter-text"
+                    placeholder="Write your new post"
+                    onChange={this.handleChange}
+                    defaultValue={''}
+                />
+                <button 
+                    id='save-post'
+                    onClick={_ => this.onClick()}
+                >
+                    Save
+                </button>
+            </div>
             {items}
         </div>)
     }
