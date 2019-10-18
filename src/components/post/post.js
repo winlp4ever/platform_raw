@@ -7,10 +7,19 @@ import { Remarkable } from 'remarkable';
 class Post extends Component {
     render() {
         return (<div 
-            className='post' 
-            dangerouslySetInnerHTML={{
-                __html: `<h1>${this.props.value.title}</h1><br><p>${this.props.value.content}</p>`
-            }}>
+            className='post'
+            >
+                <button className='del-post' onClick={_ => this.props.onClick()}>
+                    &times;
+                </button>
+                <div 
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            <h1>${this.props.value.title}</h1><br>
+                            <p>${this.props.value.content}</p>`
+                        }}
+                />
+
         </div>);
     }
 }
@@ -18,12 +27,16 @@ class Post extends Component {
 class Posts extends Component {
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
         this.savePost = this.savePost.bind(this);
+        this.handleContentChange = this.handleContentChange.bind(this);
+        this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.state = {
             posts: [],
-            value: ''
+            newPost: {
+                title: '',
+                content: ''
+            }
         }
     }
 
@@ -41,22 +54,66 @@ class Posts extends Component {
          * save new post, send it to the server to update posts, then wait
          * for server response and generate new posts
          */
-        try {     
+        try {    
+            let pass = prompt('Enter password:'); 
             const response = await fetch('/save-post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: 'new post', content: this.state.value })
+                body: JSON.stringify({ 
+                    title: this.state.newPost.title, 
+                    content: this.state.newPost.content,
+                    password: pass 
+                })
             });
             let data = await response.json();
-            this.setState({posts: data.posts, value: ''});
+            this.setState({
+                posts: data.posts,
+                newPost: {
+                    title: '',
+                    content: ''
+                }
+            });
             $('.all-posts textarea').val('');
         } catch(err) {
             console.error(`Error: ${err}`);
         }
     }
 
-    handleChange(e) {
-        this.setState({ value: e.target.value });
+    async delPost(i) {
+        try {
+            const pass = prompt('Enter password:');
+            const response = await fetch('/del-post', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    index: i,
+                    password: pass 
+                })
+            });
+            let acceptOrNot = await response.json();
+            acceptOrNot = acceptOrNot.answer
+            if (acceptOrNot == 'y') {
+                var posts_ = this.state.posts.slice();
+                posts_.splice(i, 1);
+                this.setState({posts: posts_});
+            }
+        } catch(err) {
+            console.error(`Error: ${err}`);
+        }
+    }
+
+    handleTitleChange(e) {
+        this.setState({newPost: {
+            title: e.target.value, 
+            content: this.state.newPost.content
+        }});
+    }
+
+    handleContentChange(e) {
+        this.setState({newPost: {
+            title: this.state.newPost.title,
+            content: e.target.value
+        }})
     }
 
     handleKeyPress(e) {
@@ -65,13 +122,18 @@ class Posts extends Component {
         }
     }
     
-    getRawMarkup() {
+    getTitleRawMarkup() {
         /**
          * create a remarkable obj and use it to convert md code to html
          * in markdown editor
          */
         const md = new Remarkable();
-        return md.render(this.state.value);
+        return md.render(this.state.newPost.title);
+    }
+
+    getContentRawMarkup() {
+        const md = new Remarkable();
+        return md.render(this.state.newPost.content);
     }
 
     renderEditor() {
@@ -80,13 +142,22 @@ class Posts extends Component {
          */
         return (<div className="md-editor">
             <div className="md-render"
-                dangerouslySetInnerHTML={{__html: this.getRawMarkup()}}
+                dangerouslySetInnerHTML={{
+                    __html: `<h1>${this.getTitleRawMarkup()}</h1>` + 
+                        this.getContentRawMarkup()
+                }}
             />
             <textarea
                 rows={1}
-                id="enter-text"
-                placeholder="Write your new post"
-                onChange={this.handleChange}
+                id="enter-title"
+                onChange={this.handleTitleChange}
+                placeholder="Write your post's title" 
+            />
+            <textarea
+                rows={1}
+                id="enter-content"
+                placeholder="Write your post's content"
+                onChange={this.handleContentChange}
                 defaultValue={''}
             />
             <button 
@@ -101,11 +172,11 @@ class Posts extends Component {
     render() {
         let items = []
         for (const [i, post] of this.state.posts.entries()) {
-            items.push(<Post key={i} value={post} />);
+            items.push(<Post key={i} value={post} onClick={_ => this.delPost(i)}/>);
         }
         return (<div 
-            className='all-posts'
-            onKeyPress={this.handleKeyPress}
+                className='all-posts'
+                //onKeyPress={this.handleKeyPress}
             >
             {this.renderEditor()}
             {items}

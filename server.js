@@ -50,9 +50,26 @@ app.get('/', (req, res, next) => {
     });
 });
 
+app.post('/del-post', (req, res) => {
+    if (req.body.password == '2311') {
+        posts.posts.splice(parseInt(req.body.index));
+        res.json({
+            answer: 'y'
+        })
+    }
+    else {
+        res.json({
+            answer: 'n'
+        })
+    }
+    console.log(posts);
+})
+
 app.post('/save-post', (req, res, next) => {
     console.log(req.body);
-    posts.posts.push({title: req.body.title, content: req.body.content});
+    if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
+        posts.posts.push({title: req.body.title, content: req.body.content});
+    }
     //let p = path.join(path.join(__dirname, 'build'), 'index');
     //res.sendFile(p);
     /*

@@ -1,20 +1,40 @@
 div.all-posts {
+    > div {
+        border: 1px solid rgba(0,0,0,.1);
+        box-shadow: 0 4px 24px rgba(0,0,0,.08);        
+        border-top-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        box-sizing: border-box;
+        margin: 25px auto;
+    }
     div.post {
+        .del-post {
+            right: 10px;
+            top: 0px;
+            background: none;
+            color: #0d47a1;
+            border: none;
+            outline: none;
+            font: {
+                size: 200%
+            }
+        }
         font: {
             size: 80%;
             family: 'Open Sans', sans-serif;
         }
-        
+        background-color: white;
         width: 60%;
-        margin: 10px auto;
         word-wrap: break-word;
-        padding: 5px 10px;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+        padding: 20px;
         h1 {
             display: block;
             border-bottom: 1px solid lightgrey;
             line-height: 2.0;
+            font: {
+                
+            }
+            text-transform: uppercase;
         }
     }
     width: 100%;
@@ -40,13 +60,12 @@ div.all-posts {
             transition: 0.2s all;
         }
         textarea {
-            height: 200px;
             display: block;
             color: #444444;
             font-size: 90%;
             border-radius: 5px;
             padding: 10px;
-            background-color: none;
+            background-color: #eceff1;
             border: none;
             //border-bottom: 1px solid lightgrey;
             box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);
@@ -58,21 +77,26 @@ div.all-posts {
             resize: both;
             overflow: auto;
             transition: 0.2s all;
+            &#enter-title {
+                font-size: 110%;
+                text-transform: uppercase;
+                background-color: white;
+            }
             
         }
         width: 60%;
         min-width: 400px;
-        margin: 100px auto;
-        background: white;
-        border-radius: 5px;
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-    
+        margin: 100px auto 0px;
+        background: white;    
         div.md-render {
             width: 90%;
             margin: 10px auto;
             word-wrap: break-word;
             padding: 5px 10px;
             border-bottom: 1px solid lightgrey;
+            h1 {
+                text-transform: uppercase;
+            }
         }
     
         
