@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './post.scss';
 import $ from 'jquery';
 import { Remarkable } from 'remarkable';
+import autoResize from './autoresize_textarea';
 
 
 class Post extends Component {
@@ -44,6 +45,7 @@ class Posts extends Component {
         /**
          * Request posts from server and update data on front end
          */
+        autoResize();
         let json = await fetch('/posts');
         let data = await json.json();
         this.setState({posts: data.posts})
@@ -148,12 +150,14 @@ class Posts extends Component {
                 }}
             />
             <textarea
+                className='md-input'
                 rows={1}
                 id="enter-title"
                 onChange={this.handleTitleChange}
                 placeholder="Write your post's title" 
             />
             <textarea
+                className='md-input'
                 rows={1}
                 id="enter-content"
                 placeholder="Write your post's content"
