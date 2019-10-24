@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './post.scss';
 import $ from 'jquery';
 import { Remarkable } from 'remarkable';
+import hljs from 'highlight.js';
 import { autoResize, keysBehaviours } from './autoresize_textarea';
 
 
@@ -63,8 +64,8 @@ class Posts extends Component {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    title: this.state.newPost.title, 
-                    content: this.state.newPost.content,
+                    title: this.getTitleRawMarkup(), 
+                    content: this.getContentRawMarkup(),
                     password: pass 
                 })
             });
@@ -130,12 +131,27 @@ class Posts extends Component {
          * create a remarkable obj and use it to convert md code to html
          * in markdown editor
          */
-        const md = new Remarkable();
+        const md = new Remarkable();         
         return md.render(this.state.newPost.title);
     }
 
     getContentRawMarkup() {
-        const md = new Remarkable();
+        const md = new Remarkable({
+            //langPrefix: 'hljs language-',
+            highlight: function (str, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(lang, str).value;
+                    } catch (err) {}
+                }
+          
+                try {
+                    return hljs.highlightAuto(str).value;
+                } catch (err) {}
+          
+                return ''; // use external default escaping
+            }
+        });        
         return md.render(this.state.newPost.content);
     }
 

@@ -8,6 +8,10 @@ div.all-posts {
         box-sizing: border-box;
         margin: 25px auto;
     }
+    pre {
+        background: #f9fbe7;
+        border-radius: 3px;
+    }
     div.post {
         width: 60%;
         background-color: white;
@@ -117,8 +121,6 @@ div.all-posts {
                 text-transform: uppercase;
             }
         }
-    
-        
     }
 }
 

@@ -10,13 +10,11 @@ function autoResize() {
         'white-space': 'pre-wrap',
         'word-wrap': 'break-word',
         'min-height': textareas.eq(0).css('height'),
-        'z-index': '-2'
     })
     textareas.each(function() {
         $(this).on({
             input: function() {
                 hiddenDiv.html($(this).val());
-                console.log(hiddenDiv.css('height'));
                 $(this).css('height', hiddenDiv.css('height'));
             }
         })
@@ -24,12 +22,17 @@ function autoResize() {
 }
 
 function keysBehaviours() {
+    var tabLength = 4;
     $('.md-editor').on('keydown', 'textarea.md-input', function(e) {
         // capture Tab Key in textbox
+        console.log($(this).prop('selectionStart'));
         let keycode = e.keyCode | e.which;
         if (keycode == 9) {
+            let st = $(this).prop('selectionStart');
+            let en = $(this).prop('selectionEnd');
             e.preventDefault();
-            $(this).val($(this).val() + '\t');
+            $(this).val($(this).val().substr(0, st) + '    ' + $(this).val().substr(st));
+            this.setSelectionRange(st+tabLength, st+tabLength);
         }
     })
 }
