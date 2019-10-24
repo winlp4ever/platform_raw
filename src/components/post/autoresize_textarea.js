@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default function autoResize() {
+function autoResize() {
     let textareas = $('textarea.md-input');
     let hiddenDiv = $('<div class="hiddenDiv"></div>');
     $('.md-editor').append(hiddenDiv);
@@ -12,7 +12,6 @@ export default function autoResize() {
         'min-height': textareas.eq(0).css('height'),
         'z-index': '-2'
     })
-    // Adds a class to all textareas
     textareas.each(function() {
         $(this).on({
             input: function() {
@@ -23,3 +22,16 @@ export default function autoResize() {
         })
     });
 }
+
+function keysBehaviours() {
+    $('.md-editor').on('keydown', 'textarea.md-input', function(e) {
+        // capture Tab Key in textbox
+        let keycode = e.keyCode | e.which;
+        if (keycode == 9) {
+            e.preventDefault();
+            $(this).val($(this).val() + '\t');
+        }
+    })
+}
+
+export {autoResize, keysBehaviours};

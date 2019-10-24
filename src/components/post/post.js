@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './post.scss';
 import $ from 'jquery';
 import { Remarkable } from 'remarkable';
-import autoResize from './autoresize_textarea';
+import { autoResize, keysBehaviours } from './autoresize_textarea';
 
 
 class Post extends Component {
@@ -46,6 +46,7 @@ class Posts extends Component {
          * Request posts from server and update data on front end
          */
         autoResize();
+        keysBehaviours();
         let json = await fetch('/posts');
         let data = await json.json();
         this.setState({posts: data.posts})
