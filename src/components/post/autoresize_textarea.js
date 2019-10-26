@@ -25,7 +25,6 @@ function keysBehaviours() {
     var tabLength = 4;
     $('.md-editor').on('keydown', 'textarea.md-input', function(e) {
         // capture Tab Key in textbox
-        console.log($(this).prop('selectionStart'));
         let keycode = e.keyCode | e.which;
         if (keycode == 9) {
             let st = $(this).prop('selectionStart');

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Menu from "./components/menu/menu";
-import Posts from "./components/post/post"
+import Posts from "./components/post/posts"
 
 import "./_common.scss";
 

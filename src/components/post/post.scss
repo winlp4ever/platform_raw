@@ -43,6 +43,7 @@ div.all-posts {
             }
             word-wrap: break-word;
             padding: 20px;
+            box-sizing: border-box;
             h1 {
                 display: block;
                 border-bottom: 1px solid lightgrey;
@@ -51,6 +52,17 @@ div.all-posts {
                     
                 }
                 text-transform: uppercase;
+            }
+        }
+        div.post-interact {
+            border-top: 1px solid #e6ecf0;
+            width: 100%;
+            box-sizing: border-box;
+            i.fa {
+                color: red;
+                font: {
+                    size: 200%;
+                }
             }
         }
         
