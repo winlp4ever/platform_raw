@@ -1,6 +1,6 @@
 div.all-posts {
     > div {
-        color: #131516;
+        color: #202124;
         border: 1px solid rgba(0,0,0,.1);
         box-shadow: 0 4px 24px rgba(0,0,0,.08);        
         border-top-right-radius: 8px;
@@ -55,13 +55,23 @@ div.all-posts {
             }
         }
         div.post-interact {
+            color: #616161;
             border-top: 1px solid #e6ecf0;
+            border-bottom-left-radius: 8px;
             width: 100%;
             box-sizing: border-box;
-            i.fa {
-                color: red;
-                font: {
-                    size: 200%;
+            background: whitesmoke;
+            padding: 10px 20px;
+            span {
+                height: 100%;
+                display: inline-block;
+                margin: auto 5px;
+            }
+
+            i.fab {
+                transition: all 0.2s;
+                &:hover {
+                    color: #2196f3;
                 }
             }
         }

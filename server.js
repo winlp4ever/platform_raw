@@ -63,6 +63,14 @@ app.post('/del-post', (req, res) => {
         })
     }
     console.log(posts);
+});
+
+app.post('/like-a-post', (req, res) => {
+    let idx = req.body.index;
+    posts.posts[idx][likes] ++;
+    res.json({
+        answer: 'y'
+    });
 })
 
 app.post('/save-post', (req, res, next) => {

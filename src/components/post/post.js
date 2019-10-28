@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 
 export default class Post extends Component {
+    async componentDidMount() {
+
+    }
     render() {
         return (<div 
             className='post'
@@ -18,9 +21,9 @@ export default class Post extends Component {
                 />
                 <div
                     className='post-interact'
-                    likes={this.props.likes}
                 >
-                    <span><i className="fab fa-gratipay"></i></span><span>23</span>
+                    <span><i className="fab fa-gratipay"></i></span>
+                    <span>{this.props.value.likes}</span>
                 </div>
 
         </div>);

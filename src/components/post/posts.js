@@ -17,7 +17,8 @@ class Posts extends Component {
             posts: [],
             newPost: {
                 title: '',
-                content: ''
+                content: '',
+                likes: 0
             }
         }
     }
@@ -54,7 +55,8 @@ class Posts extends Component {
                 posts: data.posts,
                 newPost: {
                     title: '',
-                    content: ''
+                    content: '',
+                    like: 0
                 }
             });
             $('.all-posts textarea').val('');
@@ -133,6 +135,27 @@ class Posts extends Component {
             }
         });        
         return md.render(this.state.newPost.content);
+    }
+
+    async handleLikes(i) {
+        try {
+            const response = await fetch('/like-a-post', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    index: i,
+                })
+            });
+            let ans = await response.json();
+            ans = response.answer
+            if (ans == 'y') {
+                var posts_ = this.state.posts.slice();
+                posts_[i][likes] ++;
+                this.setState({posts: posts_});
+            }
+        } catch(err) {
+            console.error(`Error: ${err}`);
+        }
     }
 
     renderEditor() {

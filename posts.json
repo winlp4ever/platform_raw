@@ -1,8 +1,10 @@
 {
     "posts": [
         {
+            "index": 0,
             "title": "example",
-            "content": "<p>This is an example</p>"
+            "content": "<p>This is an example</p>",
+            "likes": 0
         }
     ]
 }
