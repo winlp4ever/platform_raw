@@ -50,14 +50,18 @@ class Posts extends Component {
                 })
             });
             let data = await response.json();
-            this.setState({
-                posts: data.posts,
-                newPost: {
-                    title: '',
-                    content: '',
-                }
-            });
-            $('.all-posts textarea').val('');
+            let ans = data.answer;
+            if (ans == 'y') {
+                this.setState({
+                    posts: data.posts,
+                    newPost: {
+                        title: '',
+                        content: '',
+                    }
+                });
+                $('.all-posts textarea').val('');
+            }
+            
         } catch(err) {
             console.error(`Error: ${err}`);
         }
@@ -145,13 +149,12 @@ class Posts extends Component {
                 })
             });
             let ans = await response.json();
-            ans = response.answer;
-            console.log(ans);
-            //if (ans == 'y') {
+            ans = ans.answer;
+            if (ans == 'y') {
                 var posts_ = this.state.posts.slice();
                 posts_[i]['likes'] ++;
                 this.setState({posts: posts_});
-            //}
+            }
         } catch(err) {
             console.error(`Error: ${err}`);
         }

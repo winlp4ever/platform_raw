@@ -22,8 +22,12 @@ export default class Post extends Component {
                 <div
                     className='post-interact'
                 >
-                    <span><i className="fab fa-gratipay"></i></span>
-                    <span onClick={_ => this.props.onLike()}>{this.props.value.likes}</span>
+                    <span 
+                        onClick={_ => this.props.onLike()}
+                    >
+                        <i className="fab fa-gratipay"></i>
+                    </span>
+                    <span>{this.props.value.likes}</span>
                 </div>
 
         </div>);

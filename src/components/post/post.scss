@@ -1,3 +1,7 @@
+@import '../../animations/_animations';
+
+
+
 div.all-posts {
     > div {
         color: #202124;
@@ -42,14 +46,16 @@ div.all-posts {
                 family: 'Open Sans', sans-serif;
             }
             word-wrap: break-word;
-            padding: 20px;
+            padding: 0px;
             box-sizing: border-box;
             h1 {
+                color: rgba(0,0,0,0.6);
                 display: block;
-                border-bottom: 1px solid lightgrey;
+                border-bottom: 1px solid #ff5252;
                 line-height: 2.0;
+                letter-spacing: 1px;
                 font: {
-                    
+                    family: 'Open Sans Condensed', sans-serif;
                 }
                 text-transform: uppercase;
             }
@@ -73,6 +79,10 @@ div.all-posts {
                 &:hover {
                     color: #2196f3;
                 }
+                &:active {
+                    animation: blap 0.2s normal forwards ease-in-out;
+                    //color: $funny;
+                }
             }
         }
         
@@ -95,9 +105,13 @@ div.all-posts {
             color: whitesmoke;
             display: block;
             border: none;
+            outline: none;
             line-height: 2;
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);        
             transition: 0.2s all;
+            &:active {
+                animation: 0.2s click-save normal forwards ease-in-out;
+            }
         }
         textarea, .hiddenDiv {
             margin: auto;
@@ -123,7 +137,7 @@ div.all-posts {
             transition: 0.2s all;
             &#enter-title {
                 text-transform: uppercase;
-                background-color: white;
+                background-color: white;                
             }   
             &::-webkit-scrollbar {
                 width: 0 !important;
@@ -141,6 +155,10 @@ div.all-posts {
             border-bottom: 1px solid lightgrey;
             h1 {
                 text-transform: uppercase;
+                font: {
+                    family: 'Open Sans Condensed';
+                }
+                letter-spacing: 1px;
             }
         }
     }

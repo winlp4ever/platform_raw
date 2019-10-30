@@ -76,7 +76,20 @@ app.post('/like-a-post', (req, res) => {
 app.post('/save-post', (req, res, next) => {
     console.log(req.body);
     if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
-        posts.posts.push({title: req.body.title, content: req.body.content, likes: 0});
+        posts.posts.push({
+            title: req.body.title, 
+            content: req.body.content, 
+            likes: 0
+        });
+        console.log(posts);
+        res.json({
+            answer: 'y',
+            posts: posts.posts
+        });
+    } else {
+        res.json({
+            answer: 'n'
+        })
     }
     //let p = path.join(path.join(__dirname, 'build'), 'index');
     //res.sendFile(p);
@@ -92,8 +105,8 @@ app.post('/save-post', (req, res, next) => {
         console.log('OK');
     });
     */
-    console.log(posts);
-    res.json(posts);
+    
+    
 })
 
 app.listen(5000, 'localhost', () => {
