@@ -27,21 +27,25 @@ export default class Post extends Component {
 
     }
     render() {
-        return (<div 
-            className='post'
+        return (
+            <div 
+                className='post'
             >
                 <button className='del-post' onClick={_ => this.props.onClick()}>
-                    &times;
+                    <i className="fas fa-times"></i>
                 </button>
+                <button >
+                    <i className="fas fa-external-link-alt"></i>
+                </button>
+                <a style={{display: 'none'}} href="https://icons8.com/icon/43740/linking">Linking icon by Icons8</a>
+                
                 <PostAva userinfo={this.props.userinfo} />
                 <div className=''>
 
                 </div>
                 <div 
                     dangerouslySetInnerHTML={{
-                        __html: `
-                            <h1>${this.props.value.title}</h1><br>
-                            <p>${this.props.value.content}</p>`
+                        __html: `${this.props.value.title}\n${this.props.value.content}`
                         }}
                 />
                 <div
@@ -54,7 +58,7 @@ export default class Post extends Component {
                     </span>
                     <span>{this.props.value.likes}</span>
                 </div>
-
-        </div>);
+            </div>
+        );
     }
 }

@@ -116,7 +116,7 @@ class Posts extends Component {
          * in markdown editor
          */
         const md = new Remarkable();         
-        return md.render(this.state.newPost.title);
+        return md.render('# ' + this.state.newPost.title);
     }
 
     getContentRawMarkup() {
@@ -167,7 +167,7 @@ class Posts extends Component {
         return (<div className="md-editor">
             <div className="md-render"
                 dangerouslySetInnerHTML={{
-                    __html: `<h1>${this.getTitleRawMarkup()}</h1>` + 
+                    __html: this.getTitleRawMarkup() + 
                         this.getContentRawMarkup()
                 }}
             />

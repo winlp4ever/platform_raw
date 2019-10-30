@@ -5,8 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 
 var app = express();
+app.use(favicon(path.join(__dirname, 'imgs', 'favicon.ico')));
 app.use(express.static(__dirname + './public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
