@@ -67,7 +67,7 @@ app.post('/del-post', (req, res) => {
 
 app.post('/like-a-post', (req, res) => {
     let idx = req.body.index;
-    posts.posts[idx][likes] ++;
+    posts.posts[idx]['likes'] ++;
     res.json({
         answer: 'y'
     });
@@ -76,7 +76,7 @@ app.post('/like-a-post', (req, res) => {
 app.post('/save-post', (req, res, next) => {
     console.log(req.body);
     if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
-        posts.posts.push({title: req.body.title, content: req.body.content});
+        posts.posts.push({title: req.body.title, content: req.body.content, likes: 0});
     }
     //let p = path.join(path.join(__dirname, 'build'), 'index');
     //res.sendFile(p);

@@ -42,6 +42,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-hot-loader": "^4.12.15",
+    "react-markdown": "^4.2.2",
     "remarkable": "^2.0.0",
     "request": "^2.88.0"
   }

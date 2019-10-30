@@ -18,7 +18,6 @@ class Posts extends Component {
             newPost: {
                 title: '',
                 content: '',
-                likes: 0
             }
         }
     }
@@ -56,7 +55,6 @@ class Posts extends Component {
                 newPost: {
                     title: '',
                     content: '',
-                    like: 0
                 }
             });
             $('.all-posts textarea').val('');
@@ -91,14 +89,14 @@ class Posts extends Component {
     handleTitleChange(e) {
         this.setState({newPost: {
             title: e.target.value, 
-            content: this.state.newPost.content
+            content: this.state.newPost.content,
         }});
     }
 
     handleContentChange(e) {
         this.setState({newPost: {
             title: this.state.newPost.title,
-            content: e.target.value
+            content: e.target.value,
         }})
     }
 
@@ -147,12 +145,13 @@ class Posts extends Component {
                 })
             });
             let ans = await response.json();
-            ans = response.answer
-            if (ans == 'y') {
+            ans = response.answer;
+            console.log(ans);
+            //if (ans == 'y') {
                 var posts_ = this.state.posts.slice();
-                posts_[i][likes] ++;
+                posts_[i]['likes'] ++;
                 this.setState({posts: posts_});
-            }
+            //}
         } catch(err) {
             console.error(`Error: ${err}`);
         }
@@ -194,17 +193,26 @@ class Posts extends Component {
     }
 
     render() {
-        let items = []
+        let items = [];
         for (const [i, post] of this.state.posts.entries()) {
-            items.push(<Post key={i} value={post} onClick={_ => this.delPost(i)}/>);
+            items.push(
+                <Post 
+                    key={i} 
+                    value={post} 
+                    onClick={_ => this.delPost(i)}
+                    onLike={_ => this.handleLikes(i)}
+                />
+            );
         }
-        return (<div 
+        return (
+            <div 
                 className='all-posts'
                 //onKeyPress={this.handleKeyPress}
             >
-            {this.renderEditor()}
-            {items}
-        </div>)
+                {this.renderEditor()}
+                {items}
+            </div>
+        )
     }
 }
 
