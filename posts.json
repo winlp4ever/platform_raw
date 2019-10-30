@@ -2,6 +2,11 @@
     "posts": [
         {
             "index": 0,
+            "userinfo": {
+                "imgurl": "",
+                "username": "me",
+                "info": "."
+            },
             "title": "example",
             "content": "<p>This is an example</p>",
             "likes": 0

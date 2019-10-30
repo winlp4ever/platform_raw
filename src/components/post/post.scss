@@ -38,7 +38,7 @@ div.all-posts {
                 background-color: whitesmoke;
             }
         }
-        div {
+        > div {
             width: 90%;
             margin: auto;
             font: {
@@ -58,6 +58,40 @@ div.all-posts {
                     family: 'Open Sans Condensed', sans-serif;
                 }
                 text-transform: uppercase;
+            }
+        }
+        div.post-ava {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            font: {
+                size: 60%;
+            }
+            img {
+                height: 50px;
+                width: 50px;
+                background: whitesmoke;
+                border-radius: 50%;
+                border: none;
+            }
+            > div {
+                margin: auto 0px;
+                display: flex;
+                flex-direction: column;
+                div {
+                    //box-sizing: border-box;
+                    text-align: right;
+                    //min-width: 50px;
+                    line-height: 1.5;
+                    padding-right: 10px;
+                    padding-left: 10px;
+                    &.username {
+                        border-bottom: 2px solid #ff5252;
+                    }
+                    &.userinfo {
+                        color: rgba(0, 0, 0, 0.6);
+                    }
+                }
             }
         }
         div.post-interact {

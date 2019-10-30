@@ -77,6 +77,11 @@ app.post('/save-post', (req, res, next) => {
     console.log(req.body);
     if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
         posts.posts.push({
+            userinfo: {
+                imgurl: "",
+                username: "me",
+                info: "."
+            },
             title: req.body.title, 
             content: req.body.content, 
             likes: 0

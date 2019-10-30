@@ -200,6 +200,7 @@ class Posts extends Component {
         for (const [i, post] of this.state.posts.entries()) {
             items.push(
                 <Post 
+                    userinfo={post.userinfo}
                     key={i} 
                     value={post} 
                     onClick={_ => this.delPost(i)}
