@@ -15,7 +15,7 @@ module.exports = {
     mode: 'development',
     entry: {
         'index': ['webpack-hot-middleware/client', '@babel/polyfill', './src/index.js'],
-        'anotherPage': ['webpack-hot-middleware/client', './src/anotherPage.js']
+        'anotherPage': ['webpack-hot-middleware/client', './src/anotherPage.js'],
     },
     output: {
         filename: '[name].js',

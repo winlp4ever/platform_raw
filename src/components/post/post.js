@@ -37,7 +37,6 @@ export default class Post extends Component {
                 <button >
                     <i className="fas fa-external-link-alt"></i>
                 </button>
-                <a style={{display: 'none'}} href="https://icons8.com/icon/43740/linking">Linking icon by Icons8</a>
                 
                 <PostAva userinfo={this.props.userinfo} />
                 <div className=''>

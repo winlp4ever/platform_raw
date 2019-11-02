@@ -6,6 +6,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
+const ejs = require('ejs');
 
 var app = express();
 app.use(favicon(path.join(__dirname, 'imgs', 'favicon.ico')));
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set('views', './public');
 app.set('view engine','ejs');
+
 
 const config = require('./webpack.config.js');
 
@@ -26,6 +28,7 @@ const options = {
 // webpackDevServer.addDevServerEntrypoints(config, options);
 const compiler = webpack(config);
 //const server = new webpackDevServer(compiler, options);
+//compiler.outputFileSystem = fs;
 
 var posts = require('./posts.json');
 console.log(posts);
@@ -42,12 +45,18 @@ app.get('/posts', (req, res) => {
 
 app.get('/', (req, res, next) => {
     var filename = path.join(compiler.outputPath,'index');
-    compiler.outputFileSystem.readFile(filename, (err, result) => {
+    //console.log(filename);
+    
+    compiler.outputFileSystem.readFile(filename, async (err, result) => {
         if (err) {
             return next(err);
         }
         res.set('content-type','text/html');
-        res.send(result);
+        //res.render(filename, {something: 'funny'});
+        let html = await ejs.render(result.toString(), {demo: '<h1>oof</h1>'}, {delimiter: '&'});
+        console.log(result.toString());
+
+        res.send(html);
         res.end();
     });
 });
@@ -76,7 +85,6 @@ app.post('/like-a-post', (req, res) => {
 })
 
 app.post('/save-post', (req, res, next) => {
-    console.log(req.body);
     if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
         posts.posts.push({
             userinfo: {
@@ -98,10 +106,10 @@ app.post('/save-post', (req, res, next) => {
             answer: 'n'
         })
     }
-    //let p = path.join(path.join(__dirname, 'build'), 'index');
-    //res.sendFile(p);
-    /*
-    var filename = path.join(compiler.outputPath,'index');
+})
+
+app.get('/articles', (req, res) => {
+    var filename = path.join(compiler.outputPath,'article');
     compiler.outputFileSystem.readFile(filename, (err, result) => {
         if (err) {
             return next(err);
@@ -109,11 +117,7 @@ app.post('/save-post', (req, res, next) => {
         res.set('content-type','text/html');
         res.send(result);
         res.end();
-        console.log('OK');
     });
-    */
-    
-    
 })
 
 app.listen(5000, 'localhost', () => {
