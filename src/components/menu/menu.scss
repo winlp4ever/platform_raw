@@ -1,39 +1,44 @@
-button.option {
-    background: none;
-    border: none;
-    outline: none;
-    display: inline-block;
-    height: 100%;
-    text-align: center;
-    vertical-align: middle;
-    border-right: thin solid #dadce0;
-    border-bottom: 2px solid #00000000;
-    a {
-        font-size: 120%;
-        color: rgb(32, 32, 32);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-align: center;    
-        display: inline-block;
-        margin: auto 10px;
-    }
-    transition: all 0.2s;
-    &:hover {
-        background: rgba(0, 0, 0, 0.048);
-        border-bottom: 2px solid lightslategrey;
-    }
-}
+
 
 div.menu {
-    height: 80px;
+    height: 50px;
     position: fixed;
     width: 100%;
     top: 0px;
     left: 0px;
     padding: 0px;
-    font: {
-        family: 'Open Sans Condensed', sans-serif;
-    }
-    background-color: white;
     border-bottom: 1px solid lightgrey;
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,.12);
+    background-color: #fff;
+    button.option {
+        box-sizing: border-box;
+        background: none;
+        border: none;
+        outline: none;
+        display: inline-block;
+        height: 100%;
+        text-align: center;
+        border-bottom: 2px solid #00000000;
+        a {
+            margin: auto 0px;
+            font-size: 120%;
+            color: #5B5B5B;
+            letter-spacing: 1px;
+            //text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;    
+            display: inline-block;
+            margin: auto 10px;
+            font: {
+                family: 'Varela Round', sans-serif;
+            }
+            
+        }
+        transition: all 0.2s;
+        &:hover {
+            a {
+                color: rgb(12, 12, 12);
+            }
+        }
+    }
 }

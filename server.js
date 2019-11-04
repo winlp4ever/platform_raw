@@ -45,7 +45,6 @@ app.get('/posts', (req, res) => {
 
 app.get('/', (req, res, next) => {
     var filename = path.join(compiler.outputPath,'index');
-    //console.log(filename);
     
     compiler.outputFileSystem.readFile(filename, async (err, result) => {
         if (err) {
@@ -54,7 +53,6 @@ app.get('/', (req, res, next) => {
         res.set('content-type','text/html');
         //res.render(filename, {something: 'funny'});
         let html = await ejs.render(result.toString(), {demo: '<h1>oof</h1>'}, {delimiter: '&'});
-        console.log(result.toString());
 
         res.send(html);
         res.end();

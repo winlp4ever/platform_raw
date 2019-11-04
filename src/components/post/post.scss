@@ -4,6 +4,7 @@
 
 div.all-posts {
     > div {
+        background: #fff;
         color: #202124;
         border: 1px solid rgba(0,0,0,.1);
         box-shadow: 0 4px 24px rgba(0,0,0,.08);        
@@ -13,12 +14,11 @@ div.all-posts {
         margin: 25px auto;
     }
     pre {
-        background: #f9fbe7;
+        background: #fff;
         border-radius: 3px;
     }
     div.post {
         width: 60%;
-        background-color: white;
         > button {
             height: 30px;
             width: 30px;
