@@ -7,7 +7,10 @@ class Discuss extends Component {
         super(props);
         this.state = {
             comments: [],
-            
+            newcomment: {
+                user: 'me',
+                content: ''
+            }
         }
     }
 }
