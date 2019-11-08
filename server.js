@@ -32,6 +32,10 @@ const compiler = webpack(config);
 
 var posts = require('./posts.json');
 console.log(posts);
+var pims = [{
+    userid: 'me',
+    content: 'holy shit'
+}]
 
 app.use(
     middleware(compiler, options)
@@ -41,6 +45,10 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/posts', (req, res) => {
     res.send(posts);
+})
+
+app.get('/pims', (req, res) => {
+    res.send(pims);
 })
 
 app.get('/', (req, res, next) => {
@@ -104,6 +112,15 @@ app.post('/save-post', (req, res, next) => {
             answer: 'n'
         })
     }
+})
+
+app.post('/new-pim', (req, res) => {
+    pims.push({
+        userid: req.body.userid,
+        content: req.body.content
+    })
+    console.log(pims);
+    res.json(pims);
 })
 
 app.get('/articles', (req, res) => {

@@ -1,0 +1,30 @@
+div.chat {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+    >div, input {
+        display: block;
+        background: whitesmoke;
+        border-radius: 10px;
+        border: 1px solid lightgray;
+        outline: none;
+        font: {
+            family: 'Open Sans', sans-serif;
+            size: 60%;
+        }
+        box-sizing: border-box;
+        padding: 5px;
+        margin: 15px 0 0px auto;
+        max-width: 200px;
+        width: auto;
+        height: auto;
+        span {
+            margin: auto 5px;
+            display: inline-block;
+            text-align: right;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+    }
+}
