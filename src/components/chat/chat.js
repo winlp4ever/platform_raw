@@ -2,6 +2,8 @@ import './chat.scss';
 import React, { Component } from 'react';
 import $ from 'jquery';
 
+
+
 class Pim extends Component {
     render() {
         return (
@@ -28,12 +30,34 @@ class Chat extends Component {
     }
 
     async componentDidMount() {
+
         let json = await fetch('/pims');
         let data = await json.json();
-        this.setState({pims: data})
+        this.setState({pims: data});
+        this.waitAndSync();
     }
 
-    handleChange(event) {
+    async waitAndSync() {
+        while (true) {
+            await new Promise(res => setTimeout(_ => res(), 500));
+            const response = await fetch('/update-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    chat: this.state.pims
+                })
+            });
+            let data = await response.json();
+            console.log(data.answer);
+            if (data.answer == 'y') {
+                this.setState({
+                    pims: data.pims
+                });
+            }
+        }
+    }
+
+    async handleChange(event) {
         this.setState({newPim: event.target.value})
     }
 

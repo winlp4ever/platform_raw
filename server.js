@@ -7,6 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
 const ejs = require('ejs');
+const utils = require('./server-utils/utils');
 
 var app = express();
 app.use(favicon(path.join(__dirname, 'imgs', 'favicon.ico')));
@@ -121,6 +122,14 @@ app.post('/new-pim', (req, res) => {
     })
     console.log(pims);
     res.json(pims);
+})
+
+app.post('/update-chat', (req, res) => {
+    if (!utils.compare2Arrays(req.body.chat, pims)) {
+        res.json({answer: 'y', pims: pims});
+    } else {
+        res.json({answer: 'n'});
+    }
 })
 
 app.get('/articles', (req, res) => {
