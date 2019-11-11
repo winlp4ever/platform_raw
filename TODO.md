@@ -15,6 +15,8 @@ componentDidUpdate(prevProps) {
 }
 ```
 
+* learn `React-Markdown`
+
 ## Lessons learned
 
 * `bind` assigns a function to an object of same name or, in simpler words, it makes the function an object itself. Let's say you define a function `f` in which some properties of an object `O` are modified. So you may want to write:

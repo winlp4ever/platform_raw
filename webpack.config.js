@@ -11,11 +11,20 @@ const public = path.resolve(__dirname, 'public');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const pages = ['index', 'article'].map(name => {
+    return new HtmlWebpackPlugin({
+        inject: true,
+        chunks: [name],
+        filename: path.join(public, name),
+        template: path.join(source, name+'.ejs')
+    })
+})
+
 module.exports = {
     mode: 'development',
     entry: {
         'index': ['webpack-hot-middleware/client', '@babel/polyfill', './src/index.js'],
-        'anotherPage': ['webpack-hot-middleware/client', './src/anotherPage.js'],
+        'article': ['webpack-hot-middleware/client', '@babel/polyfill', './src/article.js'],
     },
     output: {
         filename: '[name].js',
@@ -32,18 +41,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(), //@frontend
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            inject: true,
-            chunks: ['index'],
-            filename: path.join(public, 'index'),
-            template: path.join(source, 'index.ejs')
-        }),
-        new HtmlWebpackPlugin({
-            inject: true,
-            chunks: ['anotherPage'],
-            filename: path.join(public, 'anotherPage'),
-            template: path.join(source, 'anotherPage.html')
-        })
+        ...pages
     ],
     module: {
         rules: [

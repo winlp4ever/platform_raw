@@ -53,6 +53,7 @@ app.get('/pims', (req, res) => {
 })
 
 app.get('/', (req, res, next) => {
+    console.log(req.query);
     var filename = path.join(compiler.outputPath,'index');
     
     compiler.outputFileSystem.readFile(filename, async (err, result) => {
@@ -67,6 +68,24 @@ app.get('/', (req, res, next) => {
         res.end();
     });
 });
+
+app.get('/articles', (req, res, next) => {
+    let id = parseInt(req.query.articleid);
+    console.log(id);
+    var filename = path.join(compiler.outputPath,'article');
+    
+    compiler.outputFileSystem.readFile(filename, async (err, result) => {
+        if (err) {
+            return next(err);
+        }
+        res.set('content-type','text/html');
+        //res.render(filename, {something: 'funny'});
+        let html = await ejs.render(result.toString(), {content: 'wtf'}, {delimiter: '&'});
+
+        res.send(html);
+        res.end();
+    });
+})
 
 app.post('/del-post', (req, res) => {
     if (req.body.password == '2311') {
