@@ -16,7 +16,7 @@ const pages = ['index', 'article'].map(name => {
         inject: true,
         chunks: [name],
         filename: path.join(public, name),
-        template: path.join(source, name+'.ejs')
+        template: path.join(source, name+'.html')
     })
 })
 

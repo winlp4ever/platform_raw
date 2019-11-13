@@ -6,7 +6,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const favicon = require('serve-favicon');
-const ejs = require('ejs');
 const utils = require('./server-utils/utils');
 
 var app = express();
@@ -56,36 +55,15 @@ app.get('/', (req, res, next) => {
     console.log(req.query);
     var filename = path.join(compiler.outputPath,'index');
     
-    compiler.outputFileSystem.readFile(filename, async (err, result) => {
+    compiler.outputFileSystem.readFile(filename, async (err, data) => {
         if (err) {
             return next(err);
         }
         res.set('content-type','text/html');
-        //res.render(filename, {something: 'funny'});
-        let html = await ejs.render(result.toString(), {demo: '<h1>oof</h1>'}, {delimiter: '&'});
-
-        res.send(html);
+        res.send(data);
         res.end();
     });
 });
-
-app.get('/articles', (req, res, next) => {
-    let id = parseInt(req.query.articleid);
-    console.log(id);
-    var filename = path.join(compiler.outputPath,'article');
-    
-    compiler.outputFileSystem.readFile(filename, async (err, result) => {
-        if (err) {
-            return next(err);
-        }
-        res.set('content-type','text/html');
-        //res.render(filename, {something: 'funny'});
-        let html = await ejs.render(result.toString(), {content: 'wtf'}, {delimiter: '&'});
-
-        res.send(html);
-        res.end();
-    });
-})
 
 app.post('/del-post', (req, res) => {
     if (req.body.password == '2311') {
@@ -149,18 +127,6 @@ app.post('/update-chat', (req, res) => {
     } else {
         res.json({answer: 'n'});
     }
-})
-
-app.get('/articles', (req, res) => {
-    var filename = path.join(compiler.outputPath,'article');
-    compiler.outputFileSystem.readFile(filename, (err, result) => {
-        if (err) {
-            return next(err);
-        }
-        res.set('content-type','text/html');
-        res.send(result);
-        res.end();
-    });
 })
 
 app.listen(5000, 'localhost', () => {
