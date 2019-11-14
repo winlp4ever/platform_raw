@@ -45,7 +45,7 @@ export default class Post extends Component {
                 <div 
                     dangerouslySetInnerHTML={{
                         __html: `${this.props.value.content}`
-                        }}
+                    }}
                 />
                 <div
                     className='post-interact'

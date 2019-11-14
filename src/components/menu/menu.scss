@@ -1,13 +1,16 @@
 
 
 div.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     height: 50px;
     position: fixed;
     width: 100%;
     top: 0px;
     left: 0px;
     padding: 0px;
-    background-color: whitesmoke;
+    background-color: rgb(238, 246, 255);
     button.option {
         box-sizing: border-box;
         background: none;
@@ -20,7 +23,7 @@ div.menu {
         a {
             margin: auto 0px;
             font-size: 120%;
-            color: #5B5B5B;
+            color: navy;
             letter-spacing: 1px;
             //text-transform: uppercase;
             text-decoration: none;

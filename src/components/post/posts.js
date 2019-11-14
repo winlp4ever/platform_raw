@@ -38,7 +38,10 @@ class Posts extends Component {
          */
         try {    
             let content = this.getRawMarkup();
-            let title = content.match(/\<h1\>.*\<\/h1\>/g)[0];
+            
+            let h1array = content.match(/\<h1\>.*\<\/h1\>/g);
+            if (!h1array) return;
+            let title = h1array[0];
             title = title.substr(4, title.length-9);
             console.log(`title is: ${title}`);
 

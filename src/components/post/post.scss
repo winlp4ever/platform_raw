@@ -132,16 +132,17 @@ div.all-posts {
             family: 'Open Sans', sans-serif;
         }
         button#save-post {
+            color: navy;
             font: {
+                family: 'Roboto', sans-serif;
                 size: 80%;
             }
             padding: 20px auto;
-            font-family: 'Roboto', sans-serif;
-            background: #ff1744;
+            
+            background: whitesmoke;
             border-radius: 5px;
             width: 175px;
             margin: 20px auto;
-            color: whitesmoke;
             display: block;
             border: none;
             outline: none;
@@ -174,10 +175,6 @@ div.all-posts {
             resize: both;
             overflow: auto;
             transition: 0.2s all;
-            &#enter-title {
-                text-transform: uppercase;
-                background-color: white;                
-            }   
             &::-webkit-scrollbar {
                 width: 0 !important;
             }  
@@ -191,7 +188,6 @@ div.all-posts {
             margin: 10px auto;
             word-wrap: break-word;
             padding: 5px 10px;
-            border-bottom: 1px solid lightgrey;
             h1 {
                 text-transform: uppercase;
                 font: {
