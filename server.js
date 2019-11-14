@@ -13,8 +13,6 @@ app.use(favicon(path.join(__dirname, 'imgs', 'favicon.ico')));
 app.use(express.static(__dirname + './public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.set('views', './public');
-app.set('view engine','ejs');
 
 
 const config = require('./webpack.config.js');

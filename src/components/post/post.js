@@ -44,7 +44,7 @@ export default class Post extends Component {
                 </div>
                 <div 
                     dangerouslySetInnerHTML={{
-                        __html: `${this.props.value.title}\n${this.props.value.content}`
+                        __html: `${this.props.value.content}`
                         }}
                 />
                 <div

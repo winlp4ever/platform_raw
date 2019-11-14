@@ -10,13 +10,11 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.savePost = this.savePost.bind(this);
-        this.handleContentChange = this.handleContentChange.bind(this);
-        this.handleTitleChange = this.handleTitleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.state = {
             posts: [],
             newPost: {
-                title: '',
                 content: '',
             }
         }
@@ -39,13 +37,18 @@ class Posts extends Component {
          * for server response and generate new posts
          */
         try {    
+            let content = this.getRawMarkup();
+            let title = content.match(/\<h1\>.*\<\/h1\>/g)[0];
+            title = title.substr(4, title.length-9);
+            console.log(`title is: ${title}`);
+
             let pass = prompt('Enter password:'); 
             const response = await fetch('/save-post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    title: this.getTitleRawMarkup(), 
-                    content: this.getContentRawMarkup(),
+                    title: title,
+                    content: content,
                     password: pass 
                 })
             });
@@ -55,7 +58,6 @@ class Posts extends Component {
                 this.setState({
                     posts: data.posts,
                     newPost: {
-                        title: '',
                         content: '',
                     }
                 });
@@ -90,17 +92,9 @@ class Posts extends Component {
         }
     }
 
-    handleTitleChange(e) {
+    handleChange(e) {
         this.setState({newPost: {
-            title: e.target.value, 
-            content: this.state.newPost.content,
-        }});
-    }
-
-    handleContentChange(e) {
-        this.setState({newPost: {
-            title: this.state.newPost.title,
-            content: e.target.value,
+            content: e.target.value
         }})
     }
 
@@ -110,16 +104,8 @@ class Posts extends Component {
         }
     }
     
-    getTitleRawMarkup() {
-        /**
-         * create a remarkable obj and use it to convert md code to html
-         * in markdown editor
-         */
-        const md = new Remarkable();         
-        return md.render('# ' + this.state.newPost.title);
-    }
 
-    getContentRawMarkup() {
+    getRawMarkup() {
         const md = new Remarkable({
             //langPrefix: 'hljs language-',
             highlight: function (str, lang) {
@@ -167,23 +153,16 @@ class Posts extends Component {
         return (<div className="md-editor">
             <div className="md-render"
                 dangerouslySetInnerHTML={{
-                    __html: this.getTitleRawMarkup() + 
-                        this.getContentRawMarkup()
+                    __html: this.getRawMarkup()
                 }}
             />
-            <textarea
-                className='md-input'
-                rows={1}
-                id="enter-title"
-                onChange={this.handleTitleChange}
-                placeholder="Write your post's title" 
-            />
+            
             <textarea
                 className='md-input'
                 rows={1}
                 id="enter-content"
                 placeholder="Write your post's content"
-                onChange={this.handleContentChange}
+                onChange={this.handleChange}
                 defaultValue={''}
             />
             <button 
