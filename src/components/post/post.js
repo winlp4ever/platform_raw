@@ -1,27 +1,5 @@
 import React, { Component } from 'react';
 
-const PostAva = ({ userinfo }) => {
-    return (
-        <div 
-            className='post-ava'
-        >
-            <div>
-                <div className='username'>
-                    <span>
-                        {userinfo.username}
-                    </span>                    
-                </div>
-                <div className='userinfo'>
-                    <span>
-                        {userinfo.info}
-                    </span>
-                </div>
-            </div>
-            <img/>
-        </div>
-    )
-}
-
 export default class Post extends Component {
     async componentDidMount() {
 
@@ -38,10 +16,6 @@ export default class Post extends Component {
                     <i className="fas fa-external-link-alt"></i>
                 </button>
                 
-                <PostAva userinfo={this.props.userinfo} />
-                <div className=''>
-
-                </div>
                 <div 
                     dangerouslySetInnerHTML={{
                         __html: `${this.props.value.content}`

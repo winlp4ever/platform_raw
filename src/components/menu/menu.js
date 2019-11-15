@@ -2,45 +2,44 @@ import React, { Component } from 'react';
 import './menu.scss';
 import {OptionOnClick} from './behavior';
 class Option extends Component {
-    constructor(props) {
-        super(props);
-        this.onClick = this.onClick.bind(this)
-        this.state = {
-            isActive: false, 
-            defaultClass: 'option',
-            class: 'option'
-        }
-    }
-
-    onClick() {
-        if (!this.state.isActive) {
-            this.setState({
-                class: this.state.class + ' isActive',
-                isActive: true
-            })
-        }
-    }
-
     render() {
-        return <button className={this.state.class} onClick={this.onClick}>
+        return <button className={this.props.className} onClick={_ => this.props.onClick()}>
             <a>{this.props.value}</a>
         </button>;
     }
 }
 
 class Menu extends Component {
-    componentDidMount() {
-        OptionOnClick();
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: -1,
+            options: [['Home', '/to-home'], ['Posts', '/to-posts']]
+        }
     }
-    renderOption(title) {
-        return <Option value={title}/>
+
+    handleClick(i) {
+        this.setState({active: i});
+        console.log(i);
+    }
+
+    renderOption(i) {
+        console.log('oof');
+        let classname = 'option';
+        if (i == this.state.active) classname += ' isActive';
+        return <Option 
+            key={i} 
+            value={this.state.options[i][0]} 
+            className={classname} 
+            onClick={_=>this.handleClick(i)}
+        />
     }
     
     render() {
+        let options = [];
+        for (let i in this.state.options) options.push(this.renderOption(i));
         return <div className='menu'>
-            {this.renderOption('Home')}
-            {this.renderOption('Posts')}
-            {this.renderOption('SomethingElse')}
+            {options}
         </div>
     }
 }

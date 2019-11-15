@@ -88,12 +88,9 @@ app.post('/like-a-post', (req, res) => {
 
 app.post('/save-post', (req, res, next) => {
     if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
+        let idx = posts.posts.length;
         posts.posts.push({
-            userinfo: {
-                imgurl: "",
-                username: "me",
-                info: "."
-            },
+            index: idx,
             title: req.body.title, 
             content: req.body.content, 
             likes: 0
