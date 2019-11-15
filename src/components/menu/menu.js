@@ -20,11 +20,9 @@ class Menu extends Component {
 
     handleClick(i) {
         this.setState({active: i});
-        console.log(i);
     }
 
     renderOption(i) {
-        console.log('oof');
         let classname = 'option';
         if (i == this.state.active) classname += ' isActive';
         return <Option 
