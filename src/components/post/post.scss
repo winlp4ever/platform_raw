@@ -2,11 +2,11 @@
 
 div.all-posts {
     > div {
+        border-top: 1px solid rgb(233, 233, 233);
         background: #fff;
         color: #202124;
         //border: 1px solid rgba(0,0,0,.1);
         box-shadow: -4px 12px 12px rgba(0, 0, 0, 0.041);        
-        border-top-right-radius: 8px;
         border-bottom-left-radius: 8px;
         box-sizing: border-box;
         margin: 25px auto;
