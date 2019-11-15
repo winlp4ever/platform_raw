@@ -4,13 +4,13 @@ div.menu {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 50px;
+    height: 100px;
     position: fixed;
     width: 100%;
     top: 0px;
     left: 0px;
     padding: 0px;
-    background-color: rgb(238, 246, 255);
+    background-color: white;
     button.option {
         box-sizing: border-box;
         background: none;
@@ -20,27 +20,34 @@ div.menu {
         height: 100%;
         text-align: center;
         border-top:1px solid #00000000;
+        padding: 0px;
+        margin-left: -1px;
         a {
+            display: block;
             margin: auto 0px;
+            padding: 0px 15px;
+            box-sizing: border-box;
             font-size: 120%;
-            color: navy;
+            color: #202124;
             letter-spacing: 1px;
             //text-transform: uppercase;
             text-decoration: none;
             text-align: center;    
-            display: inline-block;
-            margin: auto 10px;
             font: {
                 family: 'Varela Round', sans-serif;
             }
-            
+            transition: all 0.2s;
         }
         transition: all 0.2s;
         &:hover {
-            border-top: 1px solid skyblue;
-            background: #fff;
+            border-top: 1px solid #448aff;
             a {
-                color: rgb(12, 12, 12);
+                color: #202124af;
+            }            
+        }
+        &.isActive {
+            a {
+                color: #448aff;
             }
         }
     }
