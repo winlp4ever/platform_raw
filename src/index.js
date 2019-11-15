@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Menu from "./components/menu/menu";
 import Posts from "./components/post/posts";
 import Chat from './components/chat/chat';
+import MdEditor from './components/md-editor/md-editor';
 
 import "./_common.scss";
 import Aboutme from "./components/aboutme/aboutme";
@@ -14,7 +15,8 @@ class Main extends Component {
             isActive: 1,
             options: [
                 ['About me', _ => { return <Aboutme />; }],
-                ['Posts', _ => {return <Posts />}]
+                ['Posts', _ => {return <Posts />}],
+                ['Editor', _ => {return <MdEditor />}]
             ]
         };
         this.chooseMenuOption = this.chooseMenuOption.bind(this);
