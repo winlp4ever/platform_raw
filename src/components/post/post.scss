@@ -1,6 +1,8 @@
 @import '../../animations/_animations';
 
 div.all-posts {
+    margin: auto;
+    width: 60%;
     > div {
         border-top: 1px solid rgb(233, 233, 233);
         background: #fff;
@@ -17,7 +19,6 @@ div.all-posts {
         border-radius: 3px;
     }
     div.post {
-        width: 60%;
         > button {
             height: 30px;
             width: 30px;
@@ -93,8 +94,11 @@ div.all-posts {
             }
         }
     }
-    width: 100%;
 }
 
 
-
+@media only screen and (max-width: 600px) {
+    div.all-posts {
+        width: 100%;
+    }
+}

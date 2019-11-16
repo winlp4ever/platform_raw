@@ -74,3 +74,9 @@ div.md-editor {
         }
     }
 }
+
+@media only screen and (max-width: 600px) {
+    div.md-editor {
+        width: 100%;
+    }
+}
