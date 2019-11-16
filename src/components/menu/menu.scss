@@ -11,6 +11,7 @@ div.menu {
     left: 0px;
     padding: 0px;
     background-color: white;
+
     button.option {
         box-sizing: border-box;
         background: none;
@@ -20,12 +21,12 @@ div.menu {
         height: 100%;
         text-align: center;
         border-top:1px solid #00000000;
-        padding: 0px;
+        padding: 0px 10px;
         margin-left: -1px;
         a {
-            display: block;
+            display: inline-block;
             margin: auto 0px;
-            padding: 0px 15px;
+            padding: 20px 5px;
             box-sizing: border-box;
             font-size: 120%;
             color: #202124;
@@ -49,6 +50,9 @@ div.menu {
             a {
                 color: #448aff;
             }
+        }
+        &.cancelable {
+            background: linear-gradient(to top, white 0%, whitesmoke 100%);
         }
     }
 }

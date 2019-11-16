@@ -77,6 +77,7 @@ class Posts extends Component {
                     value={post} 
                     onClick={_ => this.delPost(i)}
                     onLike={_ => this.handleLikes(i)}
+                    viewPost={this.props.viewPost}
                 />
             );
         }

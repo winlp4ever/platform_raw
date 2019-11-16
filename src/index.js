@@ -4,7 +4,7 @@ import Menu from "./components/menu/menu";
 import Posts from "./components/post/posts";
 import Chat from './components/chat/chat';
 import MdEditor from './components/md-editor/md-editor';
-
+import Article from './components/article/article';
 import "./_common.scss";
 import Aboutme from "./components/aboutme/aboutme";
 
@@ -14,16 +14,42 @@ class Main extends Component {
         this.state = {
             isActive: 1,
             options: [
-                ['About me', _ => { return <Aboutme />; }],
-                ['Posts', _ => {return <Posts />}],
-                ['Editor', _ => {return <MdEditor />}]
+                [{name: 'About me'}, _ => { return <Aboutme />; }],
+                [{name: 'Posts'}, _ => {return <Posts viewPost={this.viewPost}/>}],
+                [{name: 'Editor'}, _ => {return <MdEditor />}]
             ]
         };
         this.chooseMenuOption = this.chooseMenuOption.bind(this);
+        this.viewPost = this.viewPost.bind(this);
+        this.cancelViewPost = this.cancelViewPost.bind(this);
     }
 
     chooseMenuOption(i) {
         this.setState({isActive: i});
+    }
+
+    viewPost(post) {
+        let options = this.state.options.slice(0, 3);
+        let view = [
+            {
+                name: post.title, 
+                cancelViewPost: this.cancelViewPost
+            }, 
+            _ => { return <Article html={post.content} />}
+        ];
+        options.push(view);
+        this.setState({
+            isActive: options.length - 1,
+            options: options
+        })
+    }
+
+    cancelViewPost() {
+        let options = this.state.options.slice(0, this.state.options.length-1);
+        this.setState({
+            isActive: 1,
+            options: options
+        })
     }
 
     render() {
@@ -51,7 +77,13 @@ function renderWeb() {
 renderWeb();
 
 if (module.hot) {
-    module.hot.accept(['./components/menu/menu', './components/post/posts', './components/chat/chat'], () => {
+    module.hot.accept(
+        [
+            './components/menu/menu', 
+            './components/post/posts', 
+            './components/chat/chat', 
+            './components/article/article'
+        ], () => {
         renderWeb();
     });
     module.hot.accept();

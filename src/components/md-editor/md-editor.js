@@ -80,7 +80,7 @@ class MdEditor extends Component {
                         content: '',
                     }
                 });
-                $('.all-posts textarea').val('');
+                $('.md-editor textarea').val('');
             }
             
         } catch(err) {

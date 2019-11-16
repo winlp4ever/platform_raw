@@ -12,7 +12,7 @@ export default class Post extends Component {
                 <button className='del-post' onClick={_ => this.props.onClick()}>
                     <i className="fas fa-times"></i>
                 </button>
-                <button >
+                <button onClick={_ => this.props.viewPost(this.props.value)}>
                     <i className="fas fa-external-link-alt"></i>
                 </button>
                 
