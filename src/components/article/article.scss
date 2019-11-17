@@ -6,3 +6,9 @@ div.article {
         size: 80%;
     }
 }
+
+@media only screen and (max-width: 600px) {
+    div.article {
+        width: 100%;
+    }
+}
