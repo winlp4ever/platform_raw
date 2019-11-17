@@ -24,6 +24,11 @@ div.menu {
         padding: 0px 10px;
         margin-left: -1px;
         a {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            word-wrap: none;
+            max-width: 150px;
             display: inline-block;
             margin: auto 0px;
             padding: 20px 5px;

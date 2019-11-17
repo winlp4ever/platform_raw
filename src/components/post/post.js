@@ -12,13 +12,13 @@ export default class Post extends Component {
                 <button className='del-post' onClick={_ => this.props.onClick()}>
                     <i className="fas fa-times"></i>
                 </button>
-                <button onClick={_ => this.props.viewPost(this.props.value)}>
+                <button onClick={_ => this.props.viewPost(this.props.post)}>
                     <i className="fas fa-external-link-alt"></i>
                 </button>
                 
                 <div 
                     dangerouslySetInnerHTML={{
-                        __html: `${this.props.value.content}`
+                        __html: `${this.props.post.content}`
                     }}
                 />
                 <div
@@ -29,7 +29,7 @@ export default class Post extends Component {
                     >
                         <i className="fab fa-gratipay"></i>
                     </span>
-                    <span>{this.props.value.likes}</span>
+                    <span>{this.props.post.likes}</span>
                 </div>
             </div>
         );

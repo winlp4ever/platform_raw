@@ -74,7 +74,7 @@ class Posts extends Component {
             items.push(
                 <Post 
                     key={i} 
-                    value={post} 
+                    post={post} 
                     onClick={_ => this.delPost(i)}
                     onLike={_ => this.handleLikes(i)}
                     viewPost={this.props.viewPost}

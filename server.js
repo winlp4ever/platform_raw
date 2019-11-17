@@ -64,8 +64,9 @@ app.get('/', (req, res, next) => {
 });
 
 app.post('/del-post', (req, res) => {
+    console.log(req.body.index);
     if (req.body.password == '2311') {
-        posts.posts.splice(parseInt(req.body.index));
+        posts.posts.splice(parseInt(req.body.index), 1);
         res.json({
             answer: 'y'
         })

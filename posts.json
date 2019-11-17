@@ -2,8 +2,8 @@
     "posts": [
         {
             "index": 0,
-            "title": "<h1>example</h1>",
-            "content": "<p>This is an example</p>",
+            "title": "example",
+            "content": "<h1>example</h1>\n<p>This is an example</p>",
             "likes": 0
         }
     ]
