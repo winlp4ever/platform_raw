@@ -35,7 +35,7 @@ class Main extends Component {
                 name: post.title, 
                 cancelViewPost: this.cancelViewPost
             }, 
-            _ => { return <Article html={post.content} />}
+            _ => { return <Article post={post} />}
         ];
         options.push(view);
         this.setState({
@@ -82,7 +82,8 @@ if (module.hot) {
             './components/menu/menu', 
             './components/post/posts', 
             './components/chat/chat', 
-            './components/article/article'
+            './components/article/article',
+            './components/comment/comment'
         ], () => {
         renderWeb();
     });

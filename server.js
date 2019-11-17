@@ -35,6 +35,16 @@ var pims = [{
     content: 'holy shit'
 }]
 
+var comments = [
+    {
+        postId: 0,
+        comments: [
+            'what the hell',
+            'hey you'
+        ]
+    }
+]
+
 app.use(
     middleware(compiler, options)
 );
@@ -123,6 +133,17 @@ app.post('/update-chat', (req, res) => {
     } else {
         res.json({answer: 'n'});
     }
+})
+
+app.post('/postComment', (req, res) => {
+    console.log(req.query.postId);
+    res.json({comments: comments[parseInt(req.query.postId)].comments});
+})
+
+app.post('/submitComment', (req, res) => {
+    console.log(req.query.postId);
+    comments[parseInt(req.query.postId)].comments.push(req.body.newComment);
+    res.json({answer: 'y'});
 })
 
 app.listen(5000, 'localhost', () => {

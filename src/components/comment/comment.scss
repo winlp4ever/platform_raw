@@ -1,0 +1,19 @@
+.comment {
+    border-top: 1px solid lightgrey;
+    margin: auto 15px;
+    span, textarea, .hiddenDiv {
+        min-width: 400px;
+        outline: none;
+        background: whitesmoke;
+        display: block;
+        border: none;
+        box-sizing: border-box;
+        padding: 5px 5px;
+        border-radius: 15px;
+        margin: 10px 10px;
+        width: auto;
+        text-align: left;
+        resize: both;
+        overflow: auto;
+    }
+}
