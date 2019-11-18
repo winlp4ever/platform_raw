@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Comment from '../comment/comment';
 import './article.scss';
-import ReactMarkdown from 'react-markdown';
+import MdRender from '../md-render/md-render';
 
 class Article extends Component {
     render() {
@@ -10,7 +10,7 @@ class Article extends Component {
                 className='article' 
             >
                 <div>
-                    <ReactMarkdown source={this.props.post.content} />
+                    <MdRender source={this.props.post.content} />
                 </div>
                 <div>
                     <Comment postId={this.props.post.index} />

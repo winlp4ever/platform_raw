@@ -4,3 +4,5 @@ console.log(JSON.stringify(u) == JSON.stringify(v));
 
 var n = null;
 if (n) console.log('wtf')
+let t = null | 'what the hell';
+console.log(t)
