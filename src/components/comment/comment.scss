@@ -2,18 +2,26 @@
     border-top: 1px solid lightgrey;
     margin: auto 15px;
     span, textarea, .hiddenDiv {
-        min-width: 400px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        resize: both;
+        overflow: auto;
+        width: 90%;
         outline: none;
         background: whitesmoke;
         display: block;
         border: none;
         box-sizing: border-box;
-        padding: 5px 5px;
+        padding: 5px 10px;
         border-radius: 15px;
-        margin: 10px 10px;
-        width: auto;
-        text-align: left;
-        resize: both;
-        overflow: auto;
+        margin: 10px auto;
+        float: left;
+        font: {
+            family: 'Open Sans', sans-serif;
+            size: 100%;
+        }
+        &::-webkit-scrollbar {
+            width: 0 !important;
+        }  
     }
 }

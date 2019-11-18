@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 function autoResize() {
     let textareas = $('.comment textarea.enter-comment');
-    let hiddenDiv = $('<div class="hiddenDiv"></div>');
+    let hiddenDiv = $('<span class="hiddenDiv"></span>');
     $('.comment').append(hiddenDiv);
     hiddenDiv.css({
         'display': 'none',
@@ -14,6 +14,7 @@ function autoResize() {
     textareas.each(function() {
         $(this).on({
             input: function() {
+                console.log(hiddenDiv.css('height'));
                 hiddenDiv.html($(this).val());
                 $(this).css('height', hiddenDiv.css('height'));
             }
