@@ -3,7 +3,7 @@ import './md-editor.scss';
 import hljs from 'highlight.js';
 import { autoResize, keysBehaviours } from './autoresize_textarea';
 import { Remarkable } from 'remarkable';
-
+import MdRender from '../md-render/md-render';
 
 class MdEditor extends Component {
     constructor(props) {
@@ -28,39 +28,18 @@ class MdEditor extends Component {
         }})
     }
 
-    getRawMarkup() {
-        const md = new Remarkable({
-            //langPrefix: 'hljs language-',
-            highlight: function (str, lang) {
-                if (lang && hljs.getLanguage(lang)) {
-                    try {
-                        return hljs.highlight(lang, str).value;
-                    } catch (err) {}
-                }
-          
-                try {
-                    return hljs.highlightAuto(str).value;
-                } catch (err) {}
-          
-                return ''; // use external default escaping
-            }
-        });        
-        return md.render(this.state.newPost.content);
-    }
-
     async savePost() {
         /**
          * save new post, send it to the server to update posts, then wait
          * for server response and generate new posts
          */
         try {    
-            let content = this.getRawMarkup();
+            let content = this.state.newPost.content;
             
-            let h1array = content.match(/\<h1\>.*\<\/h1\>/g);
+            let h1array = content.match(/#\s.*\n/g);
             if (!h1array) return;
             let title = h1array[0];
-            title = title.substr(4, title.length-9);
-            console.log(`title is: ${title}`);
+            title = title.substr(2, title.length-2);
 
             let pass = prompt('Enter password:'); 
             const response = await fetch('/save-post', {
@@ -93,11 +72,9 @@ class MdEditor extends Component {
          * This function render the Editor inside Posts section
          */
         return (<div className="md-editor">
-            <div className="md-render"
-                dangerouslySetInnerHTML={{
-                    __html: this.getRawMarkup()
-                }}
-            />
+            <div className="md-render">
+                <MdRender source={this.state.newPost.content} />
+            </div>
             
             <textarea
                 className='md-input'

@@ -14,7 +14,6 @@ function autoResize() {
     textareas.each(function() {
         $(this).on({
             input: function() {
-                console.log(hiddenDiv.css('height'));
                 hiddenDiv.html($(this).val());
                 $(this).css('height', hiddenDiv.css('height'));
             }

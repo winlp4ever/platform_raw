@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+//import ReactMarkdown from 'react-markdown';
+import MdRender from '../md-render/md-render';
+import ReactMarkdown from 'react-markdown';
 
 export default class Post extends Component {
     async componentDidMount() {
@@ -16,11 +19,9 @@ export default class Post extends Component {
                     <i className="fas fa-external-link-alt"></i>
                 </button>
                 
-                <div 
-                    dangerouslySetInnerHTML={{
-                        __html: `${this.props.post.content}`
-                    }}
-                />
+                <div>
+                    <MdRender source={this.props.post.content} />
+                </div>
                 <div
                     className='post-interact'
                 >

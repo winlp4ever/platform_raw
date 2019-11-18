@@ -19,6 +19,7 @@ div.all-posts {
         border-radius: 3px;
     }
     div.post {
+        transition: all 1s linear;
         > button {
             height: 30px;
             width: 30px;
