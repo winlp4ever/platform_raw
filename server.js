@@ -28,22 +28,28 @@ const compiler = webpack(config);
 //const server = new webpackDevServer(compiler, options);
 //compiler.outputFileSystem = fs;
 
-var posts = require('./posts.json');
-console.log(posts);
+var posts = {
+    0: {
+        index : 0,
+        title : "example",
+        content : "<h1>example</h1>\n<p>This is an example</p>",
+        likes : 0     
+    }
+}
+console.log(`Posts: ${posts}`);
 var pims = [{
     userid: 'me',
     content: 'holy shit'
 }]
 
-var comments = [
-    {
-        postId: 0,
+var comments = {
+    0: {
         comments: [
             'what the hell',
             'hey you'
         ]
     }
-]
+}
 
 app.use(
     middleware(compiler, options)
@@ -76,7 +82,8 @@ app.get('/', (req, res, next) => {
 app.post('/del-post', (req, res) => {
     console.log(req.body.index);
     if (req.body.password == '2311') {
-        posts.posts.splice(parseInt(req.body.index), 1);
+        delete posts[parseInt(req.body.index)];
+        delete comments[parseInt(req.body.index)];
         res.json({
             answer: 'y'
         })
@@ -87,11 +94,12 @@ app.post('/del-post', (req, res) => {
         })
     }
     console.log(posts);
+    
 });
 
 app.post('/like-a-post', (req, res) => {
     let idx = req.body.index;
-    posts.posts[idx]['likes'] ++;
+    posts[idx].likes ++;
     res.json({
         answer: 'y'
     });
@@ -99,17 +107,22 @@ app.post('/like-a-post', (req, res) => {
 
 app.post('/save-post', (req, res, next) => {
     if (req.body.title != '' && req.body.content != '' && req.body.password == '2311') {
-        let idx = posts.posts.length;
-        posts.posts.push({
+        console.log(`keys: ${Object.keys(posts)}`)
+        let idx = Math.max(...Object.keys(posts))+1;
+        console.log(idx);
+        posts[idx] = {
             index: idx,
             title: req.body.title, 
             content: req.body.content, 
             likes: 0
-        });
+        };
+        comments[idx] = {
+            comments: []
+        };
         console.log(posts);
         res.json({
             answer: 'y',
-            posts: posts.posts
+            posts: posts
         });
     } else {
         res.json({

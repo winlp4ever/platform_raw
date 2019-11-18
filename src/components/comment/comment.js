@@ -51,7 +51,7 @@ class Comment extends Component {
 
     render() {
         let spans = [];
-        for(const [i, comm] of this.state.comments.entries()) {
+        for(const [i, comm] of Object.entries(this.state.comments)) {
             spans.push(<span key={i}>{comm}</span>);
         }
         return (
