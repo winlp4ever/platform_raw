@@ -4,9 +4,19 @@ import MdRender from '../md-render/md-render';
 import ReactMarkdown from 'react-markdown';
 
 export default class Post extends Component {
-    async componentDidMount() {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            commentLength: '..'
+        }
     }
+    async componentDidMount() {
+        let data = await fetch(`/get-comment-size?postId=${this.props.post.index}`, {method: 'POST'});
+        let response = await data.json();
+        this.setState({ commentLength: response.len });
+        console.log(response.len);
+    }
+
     render() {
         return (
             <div 
@@ -25,12 +35,21 @@ export default class Post extends Component {
                 <div
                     className='post-interact'
                 >
-                    <span 
-                        onClick={_ => this.props.onLike()}
-                    >
-                        <i className="fab fa-gratipay"></i>
-                    </span>
-                    <span>{this.props.post.likes}</span>
+                    <div>
+                        <span 
+                            onClick={_ => this.props.onLike()}
+                        >
+                            <i className="fab fa-gratipay"></i>
+                        </span>
+                        <span>{this.props.post.likes}</span>
+                    </div>
+                    <div>
+                        <span>
+                            <i className="fas fa-comment-dots"></i>
+                        </span>
+                        <span>{this.state.commentLength}</span>
+                    </div>
+
                 </div>
             </div>
         );

@@ -97,6 +97,10 @@ app.post('/del-post', (req, res) => {
     
 });
 
+app.post('/get-single-post', (req, res) => {
+    res.json({post: posts[req.query.postId]});
+})
+
 app.post('/like-a-post', (req, res) => {
     let idx = req.body.index;
     posts[idx].likes ++;
@@ -157,6 +161,11 @@ app.post('/submitComment', (req, res) => {
     console.log(req.query.postId);
     comments[parseInt(req.query.postId)].comments.push(req.body.newComment);
     res.json({answer: 'y'});
+})
+
+app.post('/get-comment-size', (req, res) => {
+    console.log(req.query.postId);
+    res.json({len: comments[parseInt(req.query.postId)].comments.length});
 })
 
 app.listen(5000, 'localhost', () => {

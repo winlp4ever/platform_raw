@@ -35,7 +35,7 @@ class Main extends Component {
                 name: post.title, 
                 cancelViewPost: this.cancelViewPost
             }, 
-            _ => { return <Article post={post} />}
+            _ => { return <Article postId={post.index} />}
         ];
         options.push(view);
         this.setState({

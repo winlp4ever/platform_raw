@@ -1,9 +1,48 @@
 div.article {
+    color: rgb(65, 65, 65);
     margin: auto;
     width: 60%;
-    border-right: 1px solid lightgrey;
     font: {
         size: 75%;
+    }
+    h1 {
+        display: block;
+        margin: 0;
+        background: whitesmoke;
+        box-sizing: border-box;
+        padding: 10px;
+        font: {
+            family: 'Open Sans Condensed', sans-serif;
+        }
+        letter-spacing: 1px;
+    }
+    > div {
+        box-shadow: -4px 6px 12px rgba(0, 0, 0, 0.08);        
+        margin: 15px auto;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    div.comment {
+        font: {
+            size: 80%;
+        }
+    }
+    div.post-interact {
+        border-radius: 5px;
+        background: whitesmoke;
+        i {
+            color: rgb(226, 86, 86);
+        }
+        span {
+            margin: auto 5px;
+        }
+    }
+    div.comment-section {
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 5px 10px
     }
 }
 

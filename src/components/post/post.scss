@@ -63,6 +63,9 @@ div.all-posts {
             }
         }
         div.post-interact {   
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             color: #616161;
             border-bottom-left-radius: 8px;
             width: 100%;

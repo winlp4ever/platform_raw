@@ -1,12 +1,11 @@
 .comment {
-    border-top: 1px solid lightgrey;
-    margin: auto 15px;
     span, textarea, .hiddenDiv {
+        height: auto;
         white-space: pre-wrap;
         word-wrap: break-word;
         resize: both;
-        overflow: auto;
-        width: 90%;
+        overflow: hidden;
+        width: 100%;
         outline: none;
         background: whitesmoke;
         display: block;
@@ -14,8 +13,9 @@
         box-sizing: border-box;
         padding: 5px 10px;
         border-radius: 15px;
-        margin: 15px auto 0;
+        margin: 10px auto;
         float: left;
+        transition: all 0.2s;
         font: {
             family: 'Open Sans', sans-serif;
             size: 100%;
@@ -23,5 +23,8 @@
         &::-webkit-scrollbar {
             width: 0 !important;
         }  
+    }
+    textarea:focus {
+        border: 1px solid lightblue;
     }
 }
