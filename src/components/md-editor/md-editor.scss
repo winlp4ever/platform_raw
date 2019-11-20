@@ -1,6 +1,7 @@
 
 div.md-editor {
-    border-left: 1px solid lightgrey;
+    box-shadow: -4px 12px 12px rgba(0, 0, 0, 0.041);        
+    border-radius: 5px;
     font: {
         size: 80%;
         family: 'Open Sans', sans-serif;
@@ -71,6 +72,13 @@ div.md-editor {
                 family: 'Open Sans Condensed';
             }
             letter-spacing: 1px;
+        }
+        pre {
+            font: {
+                size: 80%;
+            };
+            border-radius: 5px;
+            border: 1px solid lightgrey;
         }
     }
 }

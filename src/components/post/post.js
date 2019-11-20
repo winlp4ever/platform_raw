@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//import ReactMarkdown from 'react-markdown';
 import MdRender from '../md-render/md-render';
-import ReactMarkdown from 'react-markdown';
 
 export default class Post extends Component {
     constructor(props) {

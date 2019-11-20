@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './md-editor.scss';
 import hljs from 'highlight.js';
 import { autoResize, keysBehaviours } from './autoresize_textarea';
-import { Remarkable } from 'remarkable';
 import MdRender from '../md-render/md-render';
 
 class MdEditor extends Component {

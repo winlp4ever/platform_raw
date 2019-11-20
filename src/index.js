@@ -83,7 +83,8 @@ if (module.hot) {
             './components/post/posts', 
             './components/chat/chat', 
             './components/article/article',
-            './components/comment/comment'
+            './components/comment/comment',
+            './components/aboutme/aboutme'
         ], () => {
         renderWeb();
     });

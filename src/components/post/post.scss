@@ -14,10 +14,7 @@ div.all-posts {
         margin: 25px auto;
         font-size: 90%;
     }
-    pre {
-        background: #fff;
-        border-radius: 3px;
-    }
+    
     div.post {
         transition: all 1s linear;
         > button {
@@ -96,6 +93,13 @@ div.all-posts {
             h1 {
                 border-bottom: 1px solid #ff5252;
             }
+        }
+        pre {
+            font: {
+                size: 80%;
+            };
+            border-radius: 5px;
+            border: 1px solid lightgrey;
         }
     }
 }

@@ -1,19 +1,23 @@
+@import '../../animations/_animations';
+
 .comment {
+    textarea, .hiddenDiv {
+        resize: both;
+    }
     span, textarea, .hiddenDiv {
         height: auto;
         white-space: pre-wrap;
         word-wrap: break-word;
-        resize: both;
         overflow: hidden;
         width: 100%;
         outline: none;
-        background: whitesmoke;
+        background: rgb(248, 248, 248);
         display: block;
         border: none;
         box-sizing: border-box;
         padding: 5px 10px;
         border-radius: 15px;
-        margin: 10px auto;
+        margin:10px auto;
         float: left;
         transition: all 0.2s;
         font: {
@@ -25,6 +29,6 @@
         }  
     }
     textarea:focus {
-        border: 1px solid lightblue;
+        border: 1px solid lightgrey;
     }
 }

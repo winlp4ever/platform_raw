@@ -46,13 +46,14 @@ class Article extends Component {
                 className='article' 
             >
                 <div>
-                    <MdRender source={this.state.post.content} />
+                    <div>
+                        <MdRender source={this.state.post.content} />
+
+                    </div>
                 </div>
 
-                <div
-                    className='post-interact'
-                >
-                    <div>
+                <div>
+                    <div className='post-interact'>
                         <span onClick={this.handleLikes}>
                             <i className="fab fa-gratipay"></i>
                         </span>
@@ -60,9 +61,10 @@ class Article extends Component {
                             {this.state.post.likes}
                         </span>
                     </div>
-                </div>
-                <div className='comment-section'>
-                    <Comment postId={this.props.postId} />
+                    <div className='comment-section'>
+                        <Comment postId={this.props.postId} />
+                    </div>
+                
                 </div>
                 
                 
