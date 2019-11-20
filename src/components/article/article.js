@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Comment from '../comment/comment';
 import './article.scss';
 import MdRender from '../md-render/md-render';
+import $ from 'jquery';
 
 class Article extends Component {
     constructor(props) {
@@ -13,6 +14,11 @@ class Article extends Component {
     }
 
     async componentDidMount() {
+        // disable text-select in post interact
+        $('.article .post-interact i').on('mousedown', e => {
+            e.preventDefault();
+        });
+    
         let data = await fetch(`/get-single-post?postId=${this.props.postId}`, {method: 'POST'});
         let response = await data.json();
         this.setState({ post: response.post });
