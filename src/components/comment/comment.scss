@@ -1,9 +1,7 @@
 @import '../../animations/_animations';
 
 .comment {
-    textarea, .hiddenDiv {
-        resize: both;
-    }
+    
     span, textarea, .hiddenDiv {
         height: auto;
         white-space: pre-wrap;
@@ -15,8 +13,7 @@
         display: block;
         border: none;
         box-sizing: border-box;
-        padding: 5px 10px;
-        border-radius: 15px;
+        padding: 10px 10px;
         margin:10px auto;
         float: left;
         transition: all 0.2s;
@@ -28,7 +25,15 @@
             width: 0 !important;
         }  
     }
+    textarea, .hiddenDiv {
+        resize: none;
+        border-radius: none;
+        border-bottom: 1px solid lightgrey;
+    }
+    span {
+        border-radius: 15px;
+    }
     textarea:focus {
-        border: 1px solid lightgrey;
+        border-bottom: 1px solid rgb(146, 146, 146);
     }
 }

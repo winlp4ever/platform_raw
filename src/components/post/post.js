@@ -21,7 +21,6 @@ export default class Post extends Component {
         let data = await fetch(`/get-comment-size?postId=${this.props.post.index}`, {method: 'POST'});
         let response = await data.json();
         this.setState({ commentLength: response.len });
-        console.log(response.len);
     }
 
     render() {

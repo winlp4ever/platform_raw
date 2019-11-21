@@ -48,8 +48,8 @@ div.md-editor {
         white-space: pre-wrap;
         word-wrap: break-word;
         //height: 200px;
-        resize: both;
         overflow: auto;
+        resize: none;
         transition: 0.2s all;
         &::-webkit-scrollbar {
             width: 0 !important;
