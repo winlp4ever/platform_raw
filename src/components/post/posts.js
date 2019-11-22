@@ -6,7 +6,7 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: {},
+            posts: {}
         }
     }
 
