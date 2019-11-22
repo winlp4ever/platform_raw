@@ -20,7 +20,7 @@ class Comment extends Component {
             comments: await response.comments
         })
         await this.submitComment();
-        autoResize();
+        //autoResize();
     }
 
     handleChange(e) {
@@ -52,18 +52,25 @@ class Comment extends Component {
     render() {
         let spans = [];
         for(const [i, comm] of Object.entries(this.state.comments)) {
-            spans.push(<span key={i}>{comm}</span>);
+            spans.push(<div><span key={i}>{comm}</span></div>);
         }
         return (
             <div 
                 className='comment'
             >
-                <textarea
-                    className='enter-comment' 
-                    rows={1}
-                    placeholder='type your comment here'
-                    onChange={this.handleChange}
-                ></textarea>
+                <div className='enter-comment'>
+                    <textarea
+                        rows={1}
+                        placeholder='&nbsp;'
+                        onChange={this.handleChange}
+                    ></textarea>
+                    <span className='label'>
+                        Your comment
+                    </span>
+                    <span className='border'>
+                    </span>
+                </div>
+                
                 {spans}
             </div>
         )

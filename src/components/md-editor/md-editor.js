@@ -82,15 +82,9 @@ class MdEditor extends Component {
         /**
          * This function render the Editor inside Posts section
          */
-        return (<div className="md-editor">
-            <div>
-                <div className="md-render">
-                    <MdRender source={this.state.newPost.content} />
-                </div>
-            </div>
-            
-            
-            <div>
+        return (
+        <div className="md-editor">     
+            <div className='md-window'>
                 <textarea
                     className='md-input'
                     rows={1}
@@ -105,6 +99,12 @@ class MdEditor extends Component {
                 >
                     Save
                 </button>
+            </div>
+
+            <div >
+                <div className="md-render">
+                    <MdRender source={this.state.newPost.content} />
+                </div>
             </div>
             
         </div>);
