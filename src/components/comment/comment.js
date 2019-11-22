@@ -64,10 +64,10 @@ class Comment extends Component {
                         placeholder='&nbsp;'
                         onChange={this.handleChange}
                     ></textarea>
-                    <span className='label'>
+                    <span key={-2} className='label'>
                         Your comment
                     </span>
-                    <span className='border'>
+                    <span key={-1} className='border'>
                     </span>
                 </div>
                 
