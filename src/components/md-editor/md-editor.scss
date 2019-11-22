@@ -1,7 +1,16 @@
 
 div.md-editor {
-    box-shadow: -4px 12px 12px rgba(0, 0, 0, 0.041);        
-    border-radius: 5px;
+    margin: 100px auto 0px;
+    > div {
+        box-shadow: -2px 8px 12px rgba(0, 0, 0, 0.08);        
+        border-radius: 5px;
+        width: 60%;
+        min-width: 400px;
+        margin: 15px auto 0px;
+        background: white;   
+        box-sizing: border-box;
+        padding: 10px 10px;
+    }
     font: {
         size: 80%;
         family: 'Open Sans', sans-serif;
@@ -55,13 +64,9 @@ div.md-editor {
             width: 0 !important;
         }  
     }
-    width: 60%;
-    min-width: 400px;
-    margin: 100px auto 0px;
-    background: white;   
-    box-sizing: border-box;
-    padding: 10px 10px;
+    
     div.md-render {
+        color: rgb(44, 44, 44);
         width: 90%;
         margin: 10px auto;
         word-wrap: break-word;
@@ -81,11 +86,12 @@ div.md-editor {
             border-radius: 5px;
             border: 1px solid lightgrey;
         }
+
     }
 }
 
 @media only screen and (max-width: 600px) {
-    div.md-editor {
+    div.md-editor > div{
         width: 100%;
     }
 }

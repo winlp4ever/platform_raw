@@ -9,11 +9,22 @@ class MdEditor extends Component {
         super(props);
         this.savePost = this.savePost.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            newPost: {
-                content: ''
-            }
+        if (window.newPost) {
+            this.state = {
+                newPost: {
+                    content: window.newPost
+                }
+            };
         }
+        else {
+            this.state = {
+                newPost: {
+                    content: ''
+                }
+            };
+            window.newPost = '';
+        }
+        
     }
 
     async componentDidMount() {
@@ -24,7 +35,8 @@ class MdEditor extends Component {
     handleChange(e) {
         this.setState({newPost: {
             content: e.target.value
-        }})
+        }});
+        window.newPost = e.target.value;
     }
 
     async savePost() {
@@ -71,24 +83,30 @@ class MdEditor extends Component {
          * This function render the Editor inside Posts section
          */
         return (<div className="md-editor">
-            <div className="md-render">
-                <MdRender source={this.state.newPost.content} />
+            <div>
+                <div className="md-render">
+                    <MdRender source={this.state.newPost.content} />
+                </div>
             </div>
             
-            <textarea
-                className='md-input'
-                rows={1}
-                id="enter-content"
-                placeholder="Write your post's content"
-                onChange={this.handleChange}
-                defaultValue={''}
-            />
-            <button 
-                id='save-post'
-                onClick={this.savePost}
-            >
-                Save
-            </button>
+            
+            <div>
+                <textarea
+                    className='md-input'
+                    rows={1}
+                    id="enter-content"
+                    placeholder="Write your post's content"
+                    onChange={this.handleChange}
+                    defaultValue={window.newPost}
+                />
+                <button 
+                    id='save-post'
+                    onClick={this.savePost}
+                >
+                    Save
+                </button>
+            </div>
+            
         </div>);
     }
 }
