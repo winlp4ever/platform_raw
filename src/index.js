@@ -8,6 +8,7 @@ import Article from './components/article/article';
 import "./_common.scss";
 import Aboutme from "./components/aboutme/aboutme";
 
+
 class Main extends Component {
     constructor(props) {
         super(props);
