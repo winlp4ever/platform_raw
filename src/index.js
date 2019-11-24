@@ -71,7 +71,7 @@ class Main extends Component {
         for (const [i, opt] of this.state.options.entries()) {
             menuOptions.push(opt[0]);
             let displayOrNot = (this.state.isActive == i) ? ' display': ''
-            views.push(<View displayComponent={opt[1]()} displayOrNot={displayOrNot} />)
+            views.push(<View key={i} displayComponent={opt[1]()} displayOrNot={displayOrNot} />)
         }
         return (
             <div>
