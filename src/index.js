@@ -9,6 +9,18 @@ import "./_common.scss";
 import Aboutme from "./components/aboutme/aboutme";
 
 
+class View extends Component {
+    render() {
+        let clname = `view ${this.props.displayOrNot}`;
+        return (
+            <section className={clname}>
+                {this.props.displayComponent}
+            </section>
+        )
+    }
+}
+
+
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -55,8 +67,11 @@ class Main extends Component {
 
     render() {
         let menuOptions = [];
-        for (let opt of this.state.options) {
+        let views = [];
+        for (const [i, opt] of this.state.options.entries()) {
             menuOptions.push(opt[0]);
+            let displayOrNot = (this.state.isActive == i) ? ' display': ''
+            views.push(<View displayComponent={opt[1]()} displayOrNot={displayOrNot} />)
         }
         return (
             <div>
@@ -65,7 +80,7 @@ class Main extends Component {
                     active={this.state.isActive} 
                     handleClick={this.chooseMenuOption}
                 />
-                {this.state.options[this.state.isActive][1]()}
+                {views}
             </div>
         )
     }
