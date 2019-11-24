@@ -14,9 +14,26 @@ class Posts extends Component {
         /**
          * Request posts from server and update data on front end
          */
+        console.log('oof mounted');
         let json = await fetch('/posts');
         let data = await json.json();
-        this.setState({posts: data})
+        this.setState({posts: data});
+        this.checkAndSync();
+    }
+
+    async checkAndSync() {
+        while (true) {
+            await new Promise(res => setTimeout(_ => res(), 500));
+            let response = await fetch('/posts-changed', {
+                method: 'POST'
+            })
+            let rep = await response.json();
+            if (rep.changedOrNot) {
+                let json = await fetch('/posts');
+                let data = await json.json();
+                this.setState({posts: data})
+            }
+        }
     }
 
     async delPost(i) {

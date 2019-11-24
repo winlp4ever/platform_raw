@@ -28,28 +28,15 @@ const compiler = webpack(config);
 //const server = new webpackDevServer(compiler, options);
 //compiler.outputFileSystem = fs;
 
-var posts = {
-    0: {
-        index : 0,
-        title : "example",
-        content : "<h1>example</h1>\n<p>This is an example</p>",
-        likes : 0     
-    }
-}
+var posts = require(path.join(__dirname, 'posts.json'));
+var comments = require(path.join(__dirname, 'comments.json'));
+var postsChanged = false;
+
 console.log(`Posts: ${posts}`);
 var pims = [{
     userid: 'me',
     content: 'holy shit'
 }]
-
-var comments = {
-    0: {
-        comments: [
-            'what the hell',
-            'hey you'
-        ]
-    }
-}
 
 app.use(
     middleware(compiler, options)
@@ -59,6 +46,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('/posts', (req, res) => {
     res.send(posts);
+    postsChanged = false;
 })
 
 app.get('/pims', (req, res) => {
@@ -107,6 +95,7 @@ app.post('/like-a-post', (req, res) => {
     res.json({
         answer: 'y'
     });
+    postsChanged = true;
 })
 
 app.post('/save-post', (req, res, next) => {
@@ -133,6 +122,7 @@ app.post('/save-post', (req, res, next) => {
             answer: 'n'
         })
     }
+    postsChanged = true;
 })
 
 app.post('/new-pim', (req, res) => {
@@ -161,6 +151,7 @@ app.post('/submitComment', (req, res) => {
     console.log(req.query.postId);
     comments[parseInt(req.query.postId)].comments.push(req.body.newComment);
     res.json({answer: 'y'});
+    postsChanged = true;
 })
 
 app.post('/get-comment-size', (req, res) => {
@@ -168,6 +159,17 @@ app.post('/get-comment-size', (req, res) => {
     res.json({len: comments[parseInt(req.query.postId)].comments.length});
 })
 
+app.post('/posts-changed', (req, res) => {
+    res.json({changedOrNot: postsChanged});
+})
+
 app.listen(5000, 'localhost', () => {
     console.log('dev server listening on port 5000');
 });
+
+process.on('SIGINT', _ => {
+    console.log('now you quit!');
+    fs.writeFileSync(path.join(__dirname, 'posts.json'), JSON.stringify(posts));
+    fs.writeFileSync(path.join(__dirname, 'comments.json'), JSON.stringify(comments));
+    process.exit();
+})

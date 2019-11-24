@@ -1,10 +1,1 @@
-{
-    "posts": {
-        "0" : {
-            "index": 0,
-            "title": "example",
-            "content": "<h1>example</h1>\n<p>This is an example</p>",
-            "likes": 0
-        }
-    }
-}
+{"0":{"index":0,"title":"example","content":"<h1>example</h1>\n<p>This is an example</p>","likes":8},"1":{"index":1,"title":"2nd post\n","content":"# 2nd post\n2nd","likes":6},"2":{"index":2,"title":"Hey you\n","content":"# Hey you\nadd this","likes":0},"3":{"index":3,"title":"oofs\n","content":"# oofs\nwhat happens","likes":10}}
